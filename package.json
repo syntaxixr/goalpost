@@ -1,0 +1,11 @@
+{
+  "name": "goalpost",
+  "private": true,
+  "description": "Hooks that make Claude Code's built-in /goal finish the job",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "test": "node --test test/lib.test.js test/hooks.test.js",
+    "bench": "node bench/run-bench.js"
+  }
+}
