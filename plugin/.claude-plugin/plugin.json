@@ -4,6 +4,9 @@
   "author": { "name": "syntaxixr", "url": "https://github.com/syntaxixr" },
   "homepage": "https://github.com/syntaxixr/goalpost",
   "repository": "https://github.com/syntaxixr/goalpost",
+  "documentationUrl": "https://github.com/syntaxixr/goalpost#readme",
+  "supportUrl": "https://github.com/syntaxixr/goalpost/issues",
+  "privacyPolicyUrl": "https://github.com/syntaxixr/goalpost/blob/main/docs/privacy.md",
   "license": "MIT",
-  "keywords": ["goal", "hooks", "verification", "agents", "long-running"]
+  "keywords": ["claude-code", "goal", "hooks", "verification", "agents", "long-running"]
 }
