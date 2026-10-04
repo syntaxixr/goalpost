@@ -1,0 +1,15 @@
+# Third-party code and docs used for research (linked from docs/RESEARCH.md instead)
+research/analogs/
+research/docs/
+# Raw experiment runs contain local transcripts (paths, account info) — only scripts are published
+research/experiments/*/
+# Working notes
+dev/
+# Runtime files
+.goal/
+node_modules/
+*.tmp
+nul
+docs/media/node_modules/
+docs/media/frames/
+docs/media/preview.mp4

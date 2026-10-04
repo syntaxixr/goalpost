@@ -1,0 +1,5 @@
+{
+  "name": "probe",
+  "description": "Logs every hook event to probe-events.jsonl in the cwd (research only)",
+  "version": "0.0.1"
+}
