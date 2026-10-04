@@ -1,16 +1,44 @@
-# goalpost
+<p align="center">
+  <img src="docs/media/banner.png" alt="goalpost: makes Claude Code's /goal actually finish the job" width="100%">
+</p>
 
-**Makes Claude Code's built-in `/goal` actually finish the job.**
+<p align="center">
+  <a href="https://github.com/syntaxixr/goalpost/actions/workflows/test.yml"><img alt="tests" src="https://img.shields.io/github/actions/workflow/status/syntaxixr/goalpost/test.yml?branch=main&style=for-the-badge&label=tests&labelColor=0d1117&color=ff8a3d"></a>
+  <img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude_Code-plugin-ff8a3d?style=for-the-badge&labelColor=0d1117">
+  <img alt="enforced by hooks" src="https://img.shields.io/badge/enforced_by-hooks-ff8a3d?style=for-the-badge&labelColor=0d1117">
+  <img alt="needs only Node 18+" src="https://img.shields.io/badge/needs-Node_18+-ff8a3d?style=for-the-badge&labelColor=0d1117">
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-ff8a3d?style=for-the-badge&labelColor=0d1117"></a>
+</p>
+
+<h3 align="center">Your agent says “All tests pass!” The hidden tests say 28/34.<br>goalpost makes <code>/goal</code> prove it before Claude is allowed to stop.</h3>
+
+<p align="center">
+  <a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4"><img src="docs/media/teaser.gif" alt="Same model, same task: bare /goal ends at 28/34, with goalpost at 34/34" width="860"></a><br>
+  <b><a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4">▶ Watch the full 90-second demo</a></b> · two real benchmark runs, same model, same task, nothing staged
+</p>
+
+<p align="center"><b>English</b> · <a href="README.ru.md">Русский</a></p>
+
+**Install** (then open a new Claude Code session and type `/goal` like always):
+
+```bash
+claude plugin marketplace add syntaxixr/goalpost
+claude plugin install goalpost@goalpost
+```
+
+On Windows you can just double-click [`install.bat`](install.bat). Remove it any time with
+`uninstall.bat` / `./uninstall.sh`. Details are [below](#install).
+
+---
 
 You keep typing `/goal <condition>`. goalpost, a hooks plugin, turns every goal into a frozen spec with
 checkable criteria, blocks the stop until each criterion has a fresh passing check and a clean
 fresh-eyes audit, keeps tests from being edited to fit the code, and restores the plan after context
 compaction. It's enforced by hooks, so the model can't skip it.
 
-> English · [Русский](README.ru.md)
-
-[![Watch the 90-second demo (two real runs, same model, same task)](docs/media/poster.png)](docs/media/goalpost.mp4)
-<sub>Watch the 90-second demo (two real runs, same model, same task): <a href="docs/media/goalpost.mp4">docs/media/goalpost.mp4</a></sub>
+**In one breath:** in 33 benchmark runs the built-in `/goal` judge said "done" in **17 of 17** bare runs,
+and **8 of them were broken**. With goalpost, Sonnet 5.5 finished **9 of 9** runs with every hidden check
+green. Full numbers, including where it didn't help, are [below](#benchmark).
 
 ## The problem
 

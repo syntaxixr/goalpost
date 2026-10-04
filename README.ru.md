@@ -1,16 +1,44 @@
-# goalpost
+<p align="center">
+  <img src="docs/media/banner.png" alt="goalpost: заставляет /goal в Claude Code доводить работу до конца" width="100%">
+</p>
 
-**Заставляет встроенный `/goal` в Claude Code доводить работу до конца.**
+<p align="center">
+  <a href="https://github.com/syntaxixr/goalpost/actions/workflows/test.yml"><img alt="tests" src="https://img.shields.io/github/actions/workflow/status/syntaxixr/goalpost/test.yml?branch=main&style=for-the-badge&label=tests&labelColor=0d1117&color=ff8a3d"></a>
+  <img alt="Claude Code plugin" src="https://img.shields.io/badge/Claude_Code-plugin-ff8a3d?style=for-the-badge&labelColor=0d1117">
+  <img alt="enforced by hooks" src="https://img.shields.io/badge/enforced_by-hooks-ff8a3d?style=for-the-badge&labelColor=0d1117">
+  <img alt="needs only Node 18+" src="https://img.shields.io/badge/needs-Node_18+-ff8a3d?style=for-the-badge&labelColor=0d1117">
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-ff8a3d?style=for-the-badge&labelColor=0d1117"></a>
+</p>
+
+<h3 align="center">Агент пишет «Все тесты проходят!» Скрытые тесты говорят 28/34.<br>goalpost заставляет <code>/goal</code> доказать это, прежде чем Claude остановится.</h3>
+
+<p align="center">
+  <a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4"><img src="docs/media/teaser.gif" alt="Та же модель, та же задача: голый /goal заканчивает на 28/34, с goalpost 34/34" width="860"></a><br>
+  <b><a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4">▶ Смотреть всё демо, 90 секунд</a></b> · два настоящих прогона из бенчмарка, та же модель, та же задача, ничего не подстроено
+</p>
+
+<p align="center"><a href="README.md">English</a> · <b>Русский</b></p>
+
+**Установка** (потом открой новую сессию Claude Code и пиши `/goal` как обычно):
+
+```bash
+claude plugin marketplace add syntaxixr/goalpost
+claude plugin install goalpost@goalpost
+```
+
+На Windows можно просто дважды кликнуть [`install.bat`](install.bat). Удалить в любой момент:
+`uninstall.bat` / `./uninstall.sh`. Подробно [ниже](#установка).
+
+---
 
 Ты по-прежнему пишешь `/goal <условие>`. Плагин goalpost на хуках превращает каждую цель в
 замороженное ТЗ с проверяемыми критериями, не даёт остановиться, пока по каждому критерию нет свежей
 проверки и чистого аудита свежим субагентом, не даёт подгонять тесты под код и возвращает план после
 сжатия контекста. Это делают хуки, а не просьбы к модели, поэтому пропустить это нельзя.
 
-> [English](README.md) · Русский
-
-[![Смотреть демо на 90 секунд (два настоящих прогона, та же модель, та же задача)](docs/media/poster.png)](docs/media/goalpost.mp4)
-<sub>Смотреть демо на 90 секунд (два настоящих прогона, та же модель, та же задача): <a href="docs/media/goalpost.mp4">docs/media/goalpost.mp4</a></sub>
+**Если коротко:** в бенчмарке из 33 прогонов встроенный судья `/goal` сказал «готово» во **всех 17**
+голых прогонах, и **8 из них были недоделаны**. С goalpost Sonnet 5.5 закончил **9 из 9** прогонов со
+всеми скрытыми проверками зелёными. Все цифры, включая те, где пользы не было, [ниже](#бенчмарк).
 
 ## Проблема
 

@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700;800;900&family=JetBrains+Mono:wght@500;700;800&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1280px; height: 640px; overflow: hidden; background: #07090d; }
+  body { font-family: Inter, sans-serif; color: #e6edf3; position: relative; }
+  .bg { position: absolute; inset: 0; background:
+      radial-gradient(700px 420px at 88% 105%, rgba(255,138,61,.28), transparent 65%),
+      radial-gradient(600px 380px at 8% -10%, rgba(255,138,61,.10), transparent 60%),
+      linear-gradient(180deg, #07090d, #0f141c); }
+  .grid { position: absolute; inset: 0; opacity: .35;
+    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 40px 40px; mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%); }
+  .wrap { position: absolute; left: 80px; right: 80px; top: 78px; }
+  .tag { display: inline-block; font: 800 16px/32px Inter; letter-spacing: .1em; text-transform: uppercase; color: #1f0d00; background: #ff8a3d; border-radius: 999px; padding: 0 16px; }
+  .logo { font: 900 132px/1 Inter; letter-spacing: -.05em; margin-top: 22px; color: #f2f5f8; }
+  .logo span { color: #ff8a3d; }
+  .line { font: 800 40px/1.2 Inter; letter-spacing: -.02em; margin-top: 18px; color: #fff; }
+  .line code { font-family: 'JetBrains Mono', monospace; color: #ff8a3d; font-weight: 800; }
+  .sub { font: 500 24px/1.4 Inter; color: #8b949e; margin-top: 14px; }
+  .term { position: absolute; left: 80px; right: 80px; bottom: 54px; border: 1px solid #2a2f3a; border-radius: 14px; background: rgba(13,17,23,.92);
+    padding: 16px 24px; font: 500 18px/1.75 'JetBrains Mono', monospace; white-space: nowrap; }
+  .r { color: #ff5c5c; } .g { color: #3ddc84; } .o { color: #ff8a3d; } .d { color: #8b949e; } .w { color: #fff; font-weight: 800; }
+</style>
+</head>
+<body>
+<div class="bg"></div><div class="grid"></div>
+<div class="wrap">
+  <span class="tag">Claude Code plugin</span>
+  <div class="logo">goalpost<span>.</span></div>
+  <div class="line">Makes <code>/goal</code> actually finish the job.</div>
+  <div class="sub">Frozen spec · real checks · fresh-eyes audit · enforced by hooks, not by asking nicely</div>
+</div>
+<div class="term">
+  <div><span class="d">bare /goal: </span> <span class="w">“All tests pass and all issues have been fixed!”</span> <span class="d">→ judge: met →</span> <span class="r">hidden tests 28/34</span></div>
+  <div><span class="d">+ </span><span class="o">goalpost</span><span class="d">:</span> <span class="w">same model, same task</span> <span class="d">→ 22 criteria checked, audit PASS →</span> <span class="g">hidden tests 34/34</span></div>
+</div>
+</body>
+</html>

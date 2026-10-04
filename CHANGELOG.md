@@ -34,3 +34,4 @@
   so deferring silently ended an unfinished goal).
 - Benchmark: 33 valid runs; per-task means so arms with unequal run counts compare fairly.
 - Demo video built from two real runs (docs/media, `node docs/media/make-video.mjs`).
+- README banner and teaser GIF (`node docs/media/make-banner.mjs`).
