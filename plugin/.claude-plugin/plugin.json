@@ -1,0 +1,9 @@
+{
+  "name": "goalpost",
+  "description": "Makes the built-in /goal finish the job. Hooks turn every /goal into a frozen spec with checkable criteria, block stopping until each criterion has a fresh passing check and a fresh-eyes audit, protect tests from being edited, catch repeated errors, and restore the plan after compaction.",
+  "author": { "name": "syntaxixr", "url": "https://github.com/syntaxixr" },
+  "homepage": "https://github.com/syntaxixr/goalpost",
+  "repository": "https://github.com/syntaxixr/goalpost",
+  "license": "MIT",
+  "keywords": ["goal", "hooks", "verification", "agents", "long-running"]
+}

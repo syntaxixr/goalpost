@@ -1,0 +1,12 @@
+{
+  "name": "goalpost",
+  "description": "goalpost: makes the built-in /goal finish the job — frozen spec, real checks, fresh-eyes audit, enforced by hooks.",
+  "owner": { "name": "syntaxixr" },
+  "plugins": [
+    {
+      "name": "goalpost",
+      "source": "./plugin",
+      "description": "Hooks that keep /goal working until every acceptance criterion has a fresh passing check and a clean audit."
+    }
+  ]
+}
