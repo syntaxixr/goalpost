@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700;800&display=block" rel="stylesheet">
+<style>
+  :root {
+    --bg0: #07090d; --bg1: #0f141c; --line: #232a36; --text: #e6edf3; --dim: #8b949e; --faint: #4b5563;
+    --red: #ff5c5c; --green: #3ddc84; --amber: #ffb547; --orange: #ff8a3d; --cyan: #5cc8ff; --violet: #a78bfa;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--bg0); }
+  body { font-family: Inter, system-ui, sans-serif; color: var(--text); position: relative; }
+  #bg { position: absolute; inset: 0; background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(92,200,255,.08), transparent 60%),
+      radial-gradient(1000px 700px at 85% 90%, rgba(255,138,61,.09), transparent 60%),
+      linear-gradient(180deg, var(--bg0), var(--bg1)); }
+  #grid { position: absolute; inset: 0; opacity: .35;
+    background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px);
+    background-size: 48px 48px; mask-image: radial-gradient(ellipse at center, black 40%, transparent 85%); }
+
+  /* terminal */
+  #term { position: absolute; left: 210px; top: 118px; width: 1500px; height: 760px; border-radius: 18px;
+    background: rgba(13,17,23,.96); border: 1px solid var(--line);
+    box-shadow: 0 40px 120px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.02) inset; overflow: hidden; opacity: 0; }
+  #bar { height: 50px; display: flex; align-items: center; gap: 10px; padding: 0 20px; border-bottom: 1px solid var(--line); background: rgba(255,255,255,.02); }
+  .dot { width: 14px; height: 14px; border-radius: 50%; }
+  #title { margin-left: 18px; font: 500 18px 'JetBrains Mono', monospace; color: var(--dim); }
+  #screen { position: absolute; top: 50px; left: 0; right: 0; bottom: 0; padding: 22px 34px; overflow: hidden; }
+  #lines { position: absolute; left: 34px; right: 34px; top: 22px; font: 400 23px/36px 'JetBrains Mono', monospace; white-space: pre-wrap; word-break: break-word; }
+  .l { padding: 0 10px; margin: 0 -10px; border-radius: 8px; transition: none; }
+  .prompt { color: #fff; font-weight: 700; }
+  .prompt .ch { color: var(--orange); }
+  .say { color: var(--text); }
+  .say .b { color: #fff; }
+  .tool { color: var(--text); }
+  .tool .n { color: #fff; font-weight: 700; }
+  .out { color: var(--dim); }
+  .ok { color: var(--green); }
+  .bad { color: var(--red); }
+  .goal { color: var(--cyan); }
+  .gp { color: var(--orange); }
+  .gp .tag, .tagx { display: inline-block; font: 800 15px/24px Inter, sans-serif; letter-spacing: .06em; padding: 0 9px; border-radius: 6px; margin-right: 12px; vertical-align: 2px; }
+  .gp .tag { background: rgba(255,138,61,.16); color: var(--orange); border: 1px solid rgba(255,138,61,.45); }
+  .strong { font-weight: 800; color: #fff; }
+  .mark-red { background: rgba(255,92,92,.14); box-shadow: 0 0 0 2px rgba(255,92,92,.55); }
+  .mark-amber { background: rgba(255,181,71,.12); box-shadow: 0 0 0 2px rgba(255,181,71,.55); }
+  .mark-green { background: rgba(61,220,132,.12); box-shadow: 0 0 0 2px rgba(61,220,132,.55); }
+  .mark-orange { background: rgba(255,138,61,.12); box-shadow: 0 0 0 2px rgba(255,138,61,.6); }
+  .cursor { display: inline-block; width: 12px; height: 26px; background: var(--orange); vertical-align: -5px; margin-left: 2px; }
+
+  /* pill above terminal */
+  #pill { position: absolute; left: 210px; top: 52px; display: flex; gap: 14px; align-items: center; opacity: 0; }
+  .pill { font: 800 20px/40px Inter, sans-serif; letter-spacing: .08em; padding: 0 18px; border-radius: 999px; text-transform: uppercase; }
+  .pill.red { color: #fff; background: #d63a3a; }
+  .pill.green { color: #06240f; background: var(--green); }
+  .pill.orange { color: #1f0d00; background: var(--orange); }
+  .pillsub { font: 500 22px Inter, sans-serif; color: var(--dim); }
+
+  /* caption */
+  #cap { position: absolute; left: 0; right: 0; top: 912px; text-align: center; font: 700 44px/1.25 Inter, sans-serif; color: #fff; opacity: 0; letter-spacing: -.01em; }
+  #cap em { font-style: normal; color: var(--orange); }
+  #cap .r { color: var(--red); } #cap .g { color: var(--green); }
+
+  /* side panel (hidden tests) */
+  #panel { position: absolute; top: 160px; right: 120px; width: 820px; border-radius: 18px; padding: 34px 38px;
+    background: rgba(10,13,18,.97); border: 1px solid var(--line); box-shadow: 0 30px 100px rgba(0,0,0,.7); opacity: 0; }
+  #panel .h { font: 700 22px Inter, sans-serif; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; }
+  #panel .sub { font: 500 20px Inter, sans-serif; color: var(--faint); margin-top: 6px; }
+  #panel .score { font: 900 150px/1 Inter, sans-serif; letter-spacing: -.04em; margin: 22px 0 18px; }
+  #panel .score small { font-size: 60px; color: var(--dim); font-weight: 700; }
+  #panel .it { font: 500 22px/1.55 'JetBrains Mono', monospace; color: var(--text); }
+  #panel .it .x { color: var(--red); font-weight: 800; } #panel .it .v { color: var(--green); font-weight: 800; }
+  #panel .it .d { color: var(--dim); }
+
+  /* full-screen cards */
+  .card { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; opacity: 0; padding: 0 160px; }
+  .card h1 { font: 900 104px/1.08 Inter, sans-serif; letter-spacing: -.035em; }
+  .card h2 { font: 800 72px/1.12 Inter, sans-serif; letter-spacing: -.03em; }
+  .card p { font: 500 34px/1.4 Inter, sans-serif; color: var(--dim); margin-top: 26px; }
+  .card .mono { font-family: 'JetBrains Mono', monospace; }
+  .card .o { color: var(--orange); } .card .r { color: var(--red); } .card .g { color: var(--green); } .card .c { color: var(--cyan); }
+  .card .q { color: #fff; }
+  .card .fine { font: 500 24px Inter, sans-serif; color: var(--faint); margin-top: 34px; }
+  table.res { margin-top: 40px; border-collapse: collapse; font: 600 30px Inter, sans-serif; }
+  table.res td, table.res th { padding: 16px 30px; border-bottom: 1px solid var(--line); text-align: left; }
+  table.res th { font: 700 20px Inter, sans-serif; color: var(--dim); letter-spacing: .08em; text-transform: uppercase; }
+  table.res td.num { text-align: center; font-family: 'JetBrains Mono', monospace; }
+  table.res .hl { color: var(--green); font-weight: 800; }
+  table.res .lo { color: var(--red); font-weight: 800; }
+  .cmd { font: 600 34px/1.7 'JetBrains Mono', monospace; color: #fff; background: rgba(255,255,255,.04); border: 1px solid var(--line); border-radius: 14px; padding: 18px 34px; margin-top: 34px; text-align: left; }
+  .cmd .p { color: var(--orange); }
+  .logo { font: 900 150px/1 Inter, sans-serif; letter-spacing: -.05em; }
+  .logo .dotg { color: var(--orange); }
+</style>
+</head>
+<body>
+<div id="bg"></div><div id="grid"></div>
+<div id="pill"></div>
+<div id="term"><div id="bar"><div class="dot" style="background:#ff5f57"></div><div class="dot" style="background:#febc2e"></div><div class="dot" style="background:#28c840"></div><div id="title"></div></div>
+  <div id="screen"><div id="lines"></div></div></div>
+<div id="panel"></div>
+<div id="cap"></div>
+<div id="cards"></div>
+<script>
+let D = null;
+const $ = (id) => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+const ease = (x) => 1 - Math.pow(1 - clamp(x), 3);
+// opacity for a window [a, b) with fades
+function vis(t, a, b, fi = 0.35, fo = 0.35) {
+  if (t < a || t >= b) return 0;
+  return Math.min(ease((t - a) / fi), b === Infinity ? 1 : ease((b - t) / fo));
+}
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;'); }
+
+window.setup = (data) => {
+  D = data;
+  const cards = $('cards');
+  D.cards.forEach((c, i) => {
+    const el = document.createElement('div');
+    el.className = 'card'; el.id = `card${i}`; el.innerHTML = c.html;
+    cards.appendChild(el);
+  });
+  return D.total;
+};
+
+let lastSession = null;
+window.render = (t) => {
+  // cards (each may have sub-elements with data-at for staged reveal)
+  D.cards.forEach((c, i) => {
+    const el = $(`card${i}`);
+    const o = vis(t, c.at, c.until, 0.45, 0.45);
+    el.style.opacity = o;
+    el.style.transform = `scale(${1 + 0.02 * (1 - o)})`;
+    el.querySelectorAll('[data-at]').forEach((s) => {
+      const a = c.at + Number(s.dataset.at);
+      const v = ease((t - a) / 0.4);
+      s.style.opacity = t < a ? 0 : v;
+      s.style.transform = `translateY(${(1 - v) * 16}px)`;
+    });
+  });
+  // terminal session
+  const sess = D.sessions.find((s) => t >= s.at && t < s.until);
+  const term = $('term'), pill = $('pill');
+  if (sess) {
+    const o = vis(t, sess.at, sess.until, 0.45, 0.45);
+    term.style.opacity = o; pill.style.opacity = o;
+    const H = sess.height || 760;
+    term.style.height = H + 'px';
+    term.style.top = (118 + (760 - H) / 2) + 'px';
+    term.style.transform = `translateY(${(1 - o) * 20}px)`;
+    const act = D.panels.filter((p) => t >= p.at && t < p.until);
+    const dim = act.length ? Math.max(...act.map((p) => vis(t, p.at, p.until, 0.5, 0.4))) : 0;
+    term.style.filter = dim ? `blur(${3 * dim}px) brightness(${1 - 0.6 * dim})` : 'none';
+    if (lastSession !== sess.id) {
+      $('title').textContent = sess.title;
+      pill.innerHTML = `<span class="pill ${sess.pillColor}">${esc(sess.pill)}</span><span class="pillsub">${esc(sess.sub || '')}</span>`;
+      lastSession = sess.id;
+    }
+    const shown = sess.lines.filter((l) => t >= sess.at + l.at);
+    let html = '';
+    shown.forEach((l, idx) => {
+      const lt = t - sess.at - l.at;
+      let text = l.text;
+      let cursor = '';
+      if (l.cps) {
+        const n = Math.floor(lt * l.cps);
+        const done = n >= text.length;
+        text = text.slice(0, n);
+        if (!done || (idx === shown.length - 1 && Math.floor(lt * 2) % 2 === 0)) cursor = '<span class="cursor"></span>';
+      }
+      let cls = `l ${l.cls || ''}`;
+      if (l.mark && lt >= l.mark.from && lt < l.mark.to) cls += ` mark-${l.mark.color}`;
+      const body = l.rich && !l.cps ? l.rich : esc(text);
+      html += `<div class="${cls}">${l.prefix || ''}${body}${cursor}</div>`;
+    });
+    const lines = $('lines');
+    lines.innerHTML = html;
+    const max = H - 50 - 44;
+    const h = lines.scrollHeight;
+    lines.style.transform = `translateY(${Math.min(0, max - h)}px)`;
+  } else {
+    term.style.opacity = 0; pill.style.opacity = 0;
+  }
+  // caption
+  const cap = D.captions.find((c) => t >= c.at && t < c.until);
+  const ce = $('cap');
+  if (cap) {
+    if (ce.dataset.k !== String(cap.at)) { ce.innerHTML = cap.html; ce.dataset.k = String(cap.at); }
+    const o = vis(t, cap.at, cap.until, 0.3, 0.3);
+    ce.style.opacity = o; ce.style.transform = `translateY(${(1 - o) * 12}px)`;
+  } else ce.style.opacity = 0;
+  // panel
+  const p = D.panels.find((x) => t >= x.at && t < x.until);
+  const pe = $('panel');
+  if (p) {
+    if (pe.dataset.k !== String(p.at)) {
+      pe.innerHTML = `<div class="h">${esc(p.title)}</div><div class="sub">${esc(p.sub)}</div>` +
+        `<div class="score" style="color:${p.color}">${p.score}<small> / ${p.of}</small></div>` +
+        p.items.map((it) => `<div class="it" data-k>${it.ok ? '<span class="v">✓</span>' : '<span class="x">✗</span>'} ${esc(it.text)}${it.note ? ` <span class="d">— ${esc(it.note)}</span>` : ''}</div>`).join('');
+      pe.dataset.k = String(p.at);
+    }
+    const o = vis(t, p.at, p.until, 0.5, 0.4);
+    pe.style.opacity = o; pe.style.transform = `translateX(${(1 - o) * 80}px)`;
+    const its = pe.querySelectorAll('[data-k]');
+    its.forEach((el, i) => { const a = p.at + 0.6 + i * 0.32; el.style.opacity = t < a ? 0 : ease((t - a) / 0.3); });
+    const sc = pe.querySelector('.score');
+    // count the score up
+    const k = clamp((t - p.at - 0.2) / 0.9);
+    sc.firstChild.nodeValue = String(Math.round(ease(k) * p.score));
+  } else pe.style.opacity = 0;
+};
+</script>
+</body>
+</html>
