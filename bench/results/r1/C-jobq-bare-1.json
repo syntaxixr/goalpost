@@ -1,0 +1,327 @@
+{
+  "name": "C-jobq-bare-1",
+  "task": "C-jobq",
+  "arm": "bare",
+  "rep": 1,
+  "round": "r1",
+  "model": "sonnet",
+  "exit": 0,
+  "timedOut": false,
+  "wallSecs": 87,
+  "startedAt": "2026-10-01T08:09:57.354Z",
+  "score": 0.92,
+  "checks": "23/25",
+  "reqs": "4/6",
+  "grade": {
+    "task": "C-jobq",
+    "gradedTimes": 3,
+    "checksPassed": 23,
+    "checksTotal": 25,
+    "reqsPassed": 4,
+    "reqsTotal": 6,
+    "flaky": [
+      "examples/basic.js runs and prints the results",
+      "concurrency limit is respected"
+    ],
+    "reqs": {
+      "health": {
+        "total": 4,
+        "passed": 3
+      },
+      "style": {
+        "total": 1,
+        "passed": 1
+      },
+      "store": {
+        "total": 2,
+        "passed": 2
+      },
+      "queue": {
+        "total": 9,
+        "passed": 9
+      },
+      "worker": {
+        "total": 4,
+        "passed": 3
+      },
+      "util": {
+        "total": 5,
+        "passed": 5
+      }
+    },
+    "results": [
+      {
+        "req": "health",
+        "title": "npm test (node --test) passes",
+        "ok": true,
+        "detail": "exit 0, tests 14",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "health",
+        "title": "tests use the promise API (no done-callbacks left)",
+        "ok": true,
+        "detail": "done-callback uses: 0",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "health",
+        "title": "examples/basic.js runs and prints the results",
+        "ok": false,
+        "detail": "1  Error: EPERM: operation not permitted, rename '~\\AppData\\Local\\Temp\\jobq-example-3uPNyr\\queue.json.21056.4.tmp' -> '~\\AppData\\Local\\Temp\\jobq-example-3uPNyr\\queue.json'\n    a",
+        "passes": 2,
+        "of": 3
+      },
+      {
+        "req": "health",
+        "title": "README shows the async API",
+        "ok": true,
+        "detail": "needs await examples and no (err, x) => callbacks",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "style",
+        "title": "src/ has no callback plumbing left",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "store",
+        "title": "load/save return promises; missing file = empty queue",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "store",
+        "title": "corrupt file rejects",
+        "ok": true,
+        "detail": "corrupt queue file ~\\AppData\\Local\\Temp\\jobq-grade-s2Tfvq\\q.json: Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "createQueue and every queue method return promises",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "FIFO with priority",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "peek does not change state; size counts pending",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "fail/retry lifecycle with maxAttempts",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "complete stores the result; clear removes done jobs and returns the count",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "list filters by status",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "unknown id rejects with \"not found\" (complete, fail, get, retry)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "retry of a non-failed job rejects",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "state persists across createQueue calls",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "runWorker with an async handler processes everything",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "concurrency limit is respected",
+        "ok": false,
+        "detail": "EPERM: operation not permitted, rename '~\\AppData\\Local\\Temp\\jobq-grade-VnvqHv\\q.json.19976.52.tmp' -> '~\\AppData\\Local\\Temp\\jobq-grade-VnvqHv\\q.json'",
+        "passes": 1,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "rejected handlers go through fail() and retries",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "default options work (no opts argument)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "delay returns a promise that waits",
+        "ok": true,
+        "detail": "44 ms",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "withRetry retries an async fn until it succeeds",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "withRetry rejects with the last error",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "mapLimit keeps order and respects the limit",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "mapLimit rejects when an item fails; empty input resolves to []",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      }
+    ],
+    "score": 0.92
+  },
+  "diff": "9 files changed, 209 insertions(+), 294 deletions(-)",
+  "metrics": {
+    "turns": 15,
+    "costUsd": 0.27064115,
+    "durationMs": 78791,
+    "inputTokens": 19,
+    "outputTokens": 10917,
+    "cacheRead": 208527,
+    "cacheWrite": 43481,
+    "toolCalls": 14,
+    "subagents": 0,
+    "resultSubtype": "success",
+    "lastText": "jobq now uses promises throughout. `npm test` passes (14 of 14) and `node examples/basic.js` prints the three results and `processed 3`.\n\n- **`src/`:** every function and method is `async` with no callbacks. That covers `createQueue`, all the `Queue` methods, `store.load`/`save`, and `delay`, `withRetry`, `mapLimit` and `runWorker`. Errors now arrive as rejected promises. An unknown job id still rejects with \"job not found\".\n- **`runWorker`:** it takes an async handler `handler(job)`. The handler's return value is the job result, and a throw fails that attempt (it is retried until `maxAttempts`). `runWorker` resolves to `{ processed, failed }`. `withRetry` and `mapLimit` likewise take async functions.\n- **Tests, `examples/basic.js` and `README.md`:** all updated to the new API.\n\nOne change goes beyond the migration. In `src/store.js`, `save` now writes to a uniquely named temp file. Before, concurrent saves shared one temp filename. With `concurrency` above 1, one rename could have failed because another save had already moved the file.",
+    "rate": {
+      "five_hour": {
+        "utilization": 0.67,
+        "resetsAt": 1790856600
+      },
+      "seven_day": {
+        "utilization": 0.48,
+        "resetsAt": 1791050400
+      }
+    },
+    "transcript": "~\\.claude\\projects\\C--gpbench-runs-r1-C-jobq-bare-1\\824b3cf6-4d13-40fe-9d13-bbacaa022427.jsonl",
+    "evaluator": [
+      {
+        "kind": "set",
+        "ts": "2026-10-01T08:10:01.536Z",
+        "reason": ""
+      },
+      {
+        "kind": "met",
+        "ts": "2026-10-01T08:11:20.303Z",
+        "reason": "The transcript shows all requirements are satisfied: (1) src/store.js, src/util.js, src/worker.js, and src/queue.js are all converted to async/await with no callbacks — 'every function and method is `async` with no callbacks'; (2) runWorker takes an async handler — 'it takes an async handler `handle"
+      }
+    ],
+    "stopBlocksByGoalpost": 0,
+    "sessionId": "824b3cf6-4d13-40fe-9d13-bbacaa022427",
+    "terminalReason": "completed",
+    "modelUsage": {
+      "claude-sonnet-5-5": {
+        "inputTokens": 16,
+        "outputTokens": 10673,
+        "cacheReadInputTokens": 208527,
+        "cacheCreationInputTokens": 24218,
+        "webSearchRequests": 0,
+        "costUSD": 0.2453394,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000,
+        "thinkingTokens": 711,
+        "canonicalModel": "claude-sonnet-5-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 3,
+        "outputTokens": 244,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 19263,
+        "webSearchRequests": 0,
+        "costUSD": 0.025301749999999998,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
+  },
+  "regradedAt": "2026-10-01T14:30:10.896Z"
+}

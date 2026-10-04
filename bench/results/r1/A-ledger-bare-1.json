@@ -1,0 +1,524 @@
+{
+  "name": "A-ledger-bare-1",
+  "task": "A-ledger",
+  "arm": "bare",
+  "rep": 1,
+  "round": "r1",
+  "model": "sonnet",
+  "exit": 0,
+  "timedOut": false,
+  "wallSecs": 153,
+  "startedAt": "2026-10-01T08:08:37.262Z",
+  "score": 1,
+  "checks": "46/46",
+  "reqs": "14/14",
+  "grade": {
+    "task": "A-ledger",
+    "gradedTimes": 3,
+    "checksPassed": 46,
+    "checksTotal": 46,
+    "reqsPassed": 14,
+    "reqsTotal": 14,
+    "flaky": [],
+    "reqs": {
+      "structure": {
+        "total": 4,
+        "passed": 4
+      },
+      "add": {
+        "total": 9,
+        "passed": 9
+      },
+      "money": {
+        "total": 2,
+        "passed": 2
+      },
+      "list": {
+        "total": 4,
+        "passed": 4
+      },
+      "balance": {
+        "total": 2,
+        "passed": 2
+      },
+      "delete": {
+        "total": 2,
+        "passed": 2
+      },
+      "edit": {
+        "total": 3,
+        "passed": 3
+      },
+      "budget": {
+        "total": 4,
+        "passed": 4
+      },
+      "import": {
+        "total": 2,
+        "passed": 2
+      },
+      "export": {
+        "total": 2,
+        "passed": 2
+      },
+      "report": {
+        "total": 2,
+        "passed": 2
+      },
+      "undo": {
+        "total": 3,
+        "passed": 3
+      },
+      "cli": {
+        "total": 5,
+        "passed": 5
+      },
+      "library": {
+        "total": 2,
+        "passed": 2
+      }
+    },
+    "results": [
+      {
+        "req": "structure",
+        "title": "bin/ledger.js exists",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "structure",
+        "title": "package.json has no dependencies",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "structure",
+        "title": "own test suite passes with node --test",
+        "ok": true,
+        "detail": "exit 0, tests 13",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "structure",
+        "title": "README documents every command",
+        "ok": true,
+        "detail": "missing: ",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "add prints \"added #1\" and stores the transaction",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "more than 2 decimals is rejected with exit 2",
+        "ok": true,
+        "detail": "exit 2",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "non-numeric amount is rejected with exit 2",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "empty category is rejected with exit 2",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "impossible date is rejected with exit 2",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "date defaults to today, \"+3.99\" accepted, category trimmed+lowercased",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "repeat monthly keeps day of month, clamps to month end",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "repeat handles leap years",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "add",
+        "title": "ids are never reused after delete",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "money",
+        "title": "0.1 + 0.2 = 0.30",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "money",
+        "title": "amounts stored as integer cents in the file",
+        "ok": true,
+        "detail": "{\n  \"nextId\": 2,\n  \"transactions\": [\n    {\n      \"id\": 1,\n      \"date\": \"2025-01-01\",\n      \"amount\": -1250,\n      \"category\": \"a\",\n      \"note\": \"\"\n    }\n  ],\n  \"budgets\": {},\n  \"undo\": [\n    {\n     ",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "list",
+        "title": "sorted by date, then id; no trailing space without note",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "list",
+        "title": "--category filter",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "list",
+        "title": "--from/--to are inclusive",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "list",
+        "title": "--json shape and units",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "balance",
+        "title": "balance is the sum",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "balance",
+        "title": "--by-category sorted ascending, ties by name",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "delete",
+        "title": "delete prints \"deleted #id\" and removes it",
+        "ok": true,
+        "detail": "deleted #3\n",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "delete",
+        "title": "unknown id → exit 2",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "edit",
+        "title": "edit changes only the given fields",
+        "ok": true,
+        "detail": "updated #1\n{\"id\":1,\"date\":\"2025-03-05\",\"amount\":-22.75,\"category\":\"food\",\"note\":\"pizza night\"}",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "edit",
+        "title": "edit validates like add (bad date → exit 2, unchanged)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "edit",
+        "title": "edit unknown id → exit 2",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "budget",
+        "title": "budget set prints \"budget <cat> <amount>\"",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "budget",
+        "title": "budget status per month, sorted, \"!\" when over",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "budget",
+        "title": "budget status defaults to the current month",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "budget",
+        "title": "negative budget → exit 2",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "import",
+        "title": "quoted fields with commas and \"\" quotes",
+        "ok": true,
+        "detail": "imported 2\n[{\"id\":1,\"date\":\"2025-04-01\",\"amount\":-9.99,\"category\":\"books\",\"note\":\"Dune, part 2\"},{\"id\":2,\"date\":\"2025-04-02\",\"amount\":50,\"category\":\"gift\",\"note\":\"he said \\\"hi\\\"\"}]",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "import",
+        "title": "invalid rows reported as \"line <n>: ...\" on stderr, exit 1",
+        "ok": true,
+        "detail": "1 imported 2\n line 3: invalid date '2025-04-31'\nline 4: invalid amount: 'abc' (use a number with at most 2 decimals)\n",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "export",
+        "title": "json export equals list --json",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "export",
+        "title": "csv export with header, 2 decimals, quoting",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "report",
+        "title": "monthly report lines",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "report",
+        "title": "\"top: none\" without expenses",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "undo",
+        "title": "undo reverts an add",
+        "ok": true,
+        "detail": "undone\n",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "undo",
+        "title": "undo reverts a delete",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "undo",
+        "title": "nothing to undo → exit 1",
+        "ok": true,
+        "detail": "1 nothing to undo\n ",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cli",
+        "title": "--help names every command",
+        "ok": true,
+        "detail": "exit 0 missing ",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cli",
+        "title": "unknown command → exit 2 with a message on stderr",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cli",
+        "title": "default file is ledger.json in the cwd",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cli",
+        "title": "--file works anywhere after the command",
+        "ok": true,
+        "detail": "[{\"id\":1,\"date\":\"2025-01-01\",\"amount\":7,\"category\":\"x\",\"note\":\"\"}]\n",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cli",
+        "title": "no temp files left behind (atomic write)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "library",
+        "title": "Ledger class: add/list/balance/update/remove persist to file",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "library",
+        "title": "list() filters by category and dates",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      }
+    ],
+    "score": 1
+  },
+  "diff": "",
+  "metrics": {
+    "turns": 18,
+    "costUsd": 0.4669311,
+    "durationMs": 147619,
+    "inputTokens": 23,
+    "outputTokens": 23932,
+    "cacheRead": 295708,
+    "cacheWrite": 60361,
+    "toolCalls": 17,
+    "subagents": 0,
+    "resultSubtype": "success",
+    "lastText": "`ledger` is built as TASK.md describes, and `npm test` passes all 13 tests.\n\nThe tests run the real CLI and cover each command. They also check the 0.1 + 0.2 = 0.30 case, monthly repeats clamping to short months, error exit codes, import with bad rows, and `undo`. I did not run commands by hand beyond that.\n\n- **Layout:** `bin/ledger.js` is the CLI entry. The library code is in `src/`, the tests in `test/`, and `README.md` has an example for every command. There are no npm dependencies.\n- **Undo:** the file keeps an undo history (up to 100 steps) alongside the transactions, so `undo` works across separate runs. Ids are never reused, even after an undo.\n- **Import:** a bad header makes `import` exit with 2. A valid file with some bad rows imports the good rows and exits 1. An import is undone as one step.\n\nNothing is committed yet.",
+    "rate": {
+      "five_hour": {
+        "utilization": 0.65,
+        "resetsAt": 1790856600
+      },
+      "seven_day": {
+        "utilization": 0.47,
+        "resetsAt": 1791050400
+      }
+    },
+    "transcript": "~\\.claude\\projects\\C--gpbench-runs-r1-A-ledger-bare-1\\b3f58833-0393-4e79-b501-d56a4fe3bd46.jsonl",
+    "evaluator": [
+      {
+        "kind": "set",
+        "ts": "2026-10-01T08:08:42.435Z",
+        "reason": ""
+      },
+      {
+        "kind": "met",
+        "ts": "2026-10-01T08:11:10.012Z",
+        "reason": "All 13 tests pass: `✔ cli: add/list/balance output`, `✔ cli: 0.1 + 0.2 = 0.30`, `✔ cli: monthly repeat clamps day`, `✔ cli: errors exit 2`, `✔ cli: edit and delete`, `✔ cli: budget`, `✔ cli: import with bad rows`, `✔ cli: export csv/json`, `✔ cli: report`, `✔ cli: undo walks back`, and more. The pro"
+      }
+    ],
+    "stopBlocksByGoalpost": 0,
+    "sessionId": "b3f58833-0393-4e79-b501-d56a4fe3bd46",
+    "terminalReason": "completed",
+    "modelUsage": {
+      "claude-sonnet-5-5": {
+        "inputTokens": 20,
+        "outputTokens": 23678,
+        "cacheReadInputTokens": 295708,
+        "cacheCreationInputTokens": 34271,
+        "webSearchRequests": 0,
+        "costUSD": 0.4330456,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000,
+        "thinkingTokens": 2136,
+        "canonicalModel": "claude-sonnet-5-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      },
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 3,
+        "outputTokens": 254,
+        "cacheReadInputTokens": 0,
+        "cacheCreationInputTokens": 26090,
+        "webSearchRequests": 0,
+        "costUSD": 0.0338855,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 0,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
+  },
+  "regradedAt": "2026-10-01T14:28:47.797Z"
+}

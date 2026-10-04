@@ -1,0 +1,6 @@
+{
+  "name": "A-ledger-goalpost-1",
+  "exit": 1,
+  "wallSecs": 266,
+  "reason": "stopped by the operator mid-audit to protect the rate limit; the code at that moment already scored 46/46"
+}

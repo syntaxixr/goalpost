@@ -1,0 +1,310 @@
+{
+  "name": "C-jobq-bare-1",
+  "task": "C-jobq",
+  "arm": "bare",
+  "rep": 1,
+  "round": "r3",
+  "model": "haiku",
+  "claudeVersion": "2.1.287 (Claude Code)",
+  "exit": 0,
+  "timedOut": false,
+  "wallSecs": 140,
+  "startedAt": "2026-10-02T10:56:15.136Z",
+  "score": 1,
+  "checks": "25/25",
+  "reqs": "6/6",
+  "grade": {
+    "task": "C-jobq",
+    "gradedTimes": 3,
+    "checksPassed": 25,
+    "checksTotal": 25,
+    "reqsPassed": 6,
+    "reqsTotal": 6,
+    "flaky": [],
+    "reqs": {
+      "health": {
+        "total": 4,
+        "passed": 4
+      },
+      "style": {
+        "total": 1,
+        "passed": 1
+      },
+      "store": {
+        "total": 2,
+        "passed": 2
+      },
+      "queue": {
+        "total": 9,
+        "passed": 9
+      },
+      "worker": {
+        "total": 4,
+        "passed": 4
+      },
+      "util": {
+        "total": 5,
+        "passed": 5
+      }
+    },
+    "results": [
+      {
+        "req": "health",
+        "title": "npm test (node --test) passes",
+        "ok": true,
+        "detail": "exit 0, tests 14",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "health",
+        "title": "tests use the promise API (no done-callbacks left)",
+        "ok": true,
+        "detail": "done-callback uses: 0",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "health",
+        "title": "examples/basic.js runs and prints the results",
+        "ok": true,
+        "detail": "0 job 1 done: 2\njob 2 done: 4\njob 3 done: 6\nprocessed 3\n ",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "health",
+        "title": "README shows the async API",
+        "ok": true,
+        "detail": "needs await examples and no (err, x) => callbacks",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "style",
+        "title": "src/ has no callback plumbing left",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "store",
+        "title": "load/save return promises; missing file = empty queue",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "store",
+        "title": "corrupt file rejects",
+        "ok": true,
+        "detail": "corrupt queue file ~\\AppData\\Local\\Temp\\jobq-grade-tj0K7W\\q.json: Expected property name or '}' in JSON at position 1 (line 1 column 2)",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "createQueue and every queue method return promises",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "FIFO with priority",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "peek does not change state; size counts pending",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "fail/retry lifecycle with maxAttempts",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "complete stores the result; clear removes done jobs and returns the count",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "list filters by status",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "unknown id rejects with \"not found\" (complete, fail, get, retry)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "retry of a non-failed job rejects",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "queue",
+        "title": "state persists across createQueue calls",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "runWorker with an async handler processes everything",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "concurrency limit is respected",
+        "ok": true,
+        "detail": "peak 3",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "rejected handlers go through fail() and retries",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "worker",
+        "title": "default options work (no opts argument)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "delay returns a promise that waits",
+        "ok": true,
+        "detail": "35 ms",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "withRetry retries an async fn until it succeeds",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "withRetry rejects with the last error",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "mapLimit keeps order and respects the limit",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "util",
+        "title": "mapLimit rejects when an item fails; empty input resolves to []",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      }
+    ],
+    "score": 1
+  },
+  "diff": "",
+  "metrics": {
+    "turns": 31,
+    "costUsd": 0.254361,
+    "durationMs": 136654,
+    "inputTokens": 197,
+    "outputTokens": 13873,
+    "cacheRead": 885460,
+    "cacheWrite": 58223,
+    "toolCalls": 30,
+    "subagents": 0,
+    "resultSubtype": "success",
+    "lastText": "Perfect! The migration is complete. Here's a summary of what was done:\n\n## Migration Complete ✅\n\nAll jobq code has been successfully migrated from callbacks to promises:\n\n**Source changes (src/):**\n- `store.js`: Now uses `fs.promises` instead of callback-based fs methods\n- `queue.js`: All methods (`push`, `pop`, `peek`, `get`, `complete`, `fail`, `retry`, `size`, `list`, `clear`) are async\n- `worker.js`: Simplified to use concurrent worker tasks; `runWorker` accepts async handler functions\n- `util.js`: `delay`, `withRetry`, and `mapLimit` all return Promises\n\n**Test changes:**\n- All 14 tests converted to async/await - **all pass** ✅\n- Tests for queue, worker, store, and utilities all working correctly\n\n**Examples & Documentation:**\n- `examples/basic.js` works correctly with async/await\n- `README.md` updated with new Promise-based API documentation\n\n**Tests:** `npm test` ✅ (14/14 pass)  \n**Example:** `node examples/basic.js` ✅ (outputs expected results)",
+    "rate": {
+      "five_hour": {
+        "utilization": 0.56,
+        "resetsAt": 1790950200
+      },
+      "seven_day": {
+        "utilization": 0.65,
+        "resetsAt": 1791050400
+      }
+    },
+    "transcript": "~\\.claude\\projects\\C--gpbench-runs-r3-C-jobq-bare-1\\810f600d-9033-46e5-94c3-81d75799bc55.jsonl",
+    "evaluator": [
+      {
+        "kind": "set",
+        "ts": "2026-10-02T10:56:18.446Z",
+        "reason": ""
+      },
+      {
+        "kind": "met",
+        "ts": "2026-10-02T10:58:35.081Z",
+        "reason": "The transcript shows all requirements met: (1) Every function and method in src/ returns a Promise - store.js uses fs.promises, queue.js methods are async (push, pop, peek, get, complete, fail, retry, size, list, clear), worker.js and util.js functions are async; (2) No callbacks are taken - all fun"
+      }
+    ],
+    "stopBlocksByGoalpost": 0,
+    "sessionId": "810f600d-9033-46e5-94c3-81d75799bc55",
+    "terminalReason": "completed",
+    "modelUsage": {
+      "claude-haiku-4-5-20251001": {
+        "inputTokens": 197,
+        "outputTokens": 13873,
+        "cacheReadInputTokens": 885460,
+        "cacheCreationInputTokens": 58223,
+        "webSearchRequests": 0,
+        "costUSD": 0.254361,
+        "contextWindow": 200000,
+        "maxOutputTokens": 32000,
+        "thinkingTokens": 1287,
+        "canonicalModel": "claude-haiku-4-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
+  }
+}

@@ -1,0 +1,274 @@
+08:08:37 round r1: tasks A,B,C arms bare,goalpost reps 1 model sonnet claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+08:08:37 start A-ledger-bare-1
+08:08:57 start A-ledger-goalpost-1
+08:09:19 start B-textkit-bare-1
+08:09:37 start B-textkit-goalpost-1
+08:09:57 start C-jobq-bare-1
+08:10:17 start C-jobq-goalpost-1
+08:10:29 end B-textkit-bare-1 exit=0 70s — grading
+08:10:30 done B-textkit-bare-1: score 1 (34/34) cost $0.19357925000000004 turns 9
+08:11:10 end A-ledger-bare-1 exit=0 153s — grading
+08:11:24 done A-ledger-bare-1: score 1 (46/46) cost $0.4669311 turns 18
+08:11:24 end C-jobq-bare-1 exit=0 87s — grading
+08:11:24 done C-jobq-bare-1: score 1 (25/25) cost $0.27064115 turns 15
+08:12:15 end B-textkit-goalpost-1 exit=0 158s — grading
+08:12:17 done B-textkit-goalpost-1: score 0.9706 (33/34) cost $0.4916470500000001 turns 1
+08:12:42 end C-jobq-goalpost-1 exit=0 146s — grading
+08:12:43 done C-jobq-goalpost-1: score 1 (25/25) cost $0.5189475000000001 turns 1
+08:13:23 end A-ledger-goalpost-1 exit=1 266s — grading
+08:13:41 done A-ledger-goalpost-1: score 1 (46/46) cost $null turns null
+08:13:41 round r1 finished: B-textkit-bare-1=1, A-ledger-bare-1=1, C-jobq-bare-1=1, B-textkit-goalpost-1=0.9706, C-jobq-goalpost-1=1, A-ledger-goalpost-1=1
+08:25:03 round r2: tasks D arms bare,goalpost reps 3 model sonnet claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+08:25:10 start D-sheet-bare-1
+08:25:23 start D-sheet-goalpost-1
+08:25:43 start D-sheet-bare-2
+08:26:03 start D-sheet-goalpost-2
+08:26:23 start D-sheet-bare-3
+08:26:43 start D-sheet-goalpost-3
+14:20:55 round r2: tasks D arms bare,goalpost reps 3 model sonnet claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+14:21:04 start D-sheet-bare-1
+14:21:15 start D-sheet-goalpost-1
+14:21:35 start D-sheet-bare-2
+14:25:34 end D-sheet-bare-1 exit=0 270s — grading
+14:25:34 done D-sheet-bare-1: score 0.9863 (72/73) cost $0.73419655 turns 12
+14:25:35 start D-sheet-goalpost-2
+14:25:51 end D-sheet-bare-2 exit=0 256s — grading
+14:25:51 done D-sheet-bare-2: score 1 (73/73) cost $0.6713482000000001 turns 12
+14:25:52 start D-sheet-bare-3
+14:30:21 end D-sheet-goalpost-1 exit=0 545s — grading
+14:30:21 done D-sheet-goalpost-1: score 1 (73/73) cost $1.4849952499999997 turns 1
+14:30:22 start D-sheet-goalpost-3
+14:30:49 round r3: tasks A,B,C,D arms bare,goalpost reps 2 model haiku claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+14:31:04 start A-ledger-bare-1
+14:31:20 start A-ledger-goalpost-1
+14:31:29 end D-sheet-bare-3 exit=0 337s — grading
+14:31:31 start B-textkit-bare-1
+14:31:31 done D-sheet-bare-3: score 1 (73/73) cost $0.7703876000000001 turns 12
+14:31:52 start B-textkit-goalpost-1
+14:35:16 end B-textkit-bare-1 exit=0 226s — grading
+14:35:22 done B-textkit-bare-1: score 0.9706 (33/34) cost $0.20572920000000006 turns 35
+14:35:22 5h window at 99% — waiting until 19:11 UTC
+14:35:22 end D-sheet-goalpost-2 exit=0 588s — grading
+14:35:24 done D-sheet-goalpost-2: score 1 (73/73) cost $1.4293741 turns 1
+14:35:30 end A-ledger-bare-1 exit=1 267s — grading
+14:36:12 end D-sheet-goalpost-3 exit=1 350s — grading
+14:36:13 done D-sheet-goalpost-3: score 0.9726 (71/73) cost $0.6764614 turns 9
+14:36:13 round r2 finished: D-sheet-bare-1=0.9863, D-sheet-bare-2=1, D-sheet-goalpost-1=1, D-sheet-bare-3=1, D-sheet-goalpost-2=1, D-sheet-goalpost-3=0.9726
+14:36:54 done A-ledger-bare-1: score 0.8478 (39/46) cost $0.26500159999999995 turns 24
+14:36:54 5h window at 100% — waiting until 19:11 UTC
+14:36:54 end B-textkit-goalpost-1 exit=1 302s — grading
+14:36:59 done B-textkit-goalpost-1: score 0.9412 (32/34) cost $0.15421870000000001 turns 32
+14:36:59 5h window at 100% — waiting until 19:11 UTC
+14:36:59 end A-ledger-goalpost-1 exit=1 339s — grading
+14:38:26 done A-ledger-goalpost-1: score 0.8043 (37/46) cost $0.16830409999999998 turns 15
+14:38:26 5h window at 100% — waiting until 19:11 UTC
+15:05:32 5h window at 102% — waiting until 19:11 UTC
+15:07:03 5h window at 102% — waiting until 19:11 UTC
+15:07:09 5h window at 102% — waiting until 19:11 UTC
+15:08:37 5h window at 102% — waiting until 19:11 UTC
+15:35:43 5h window at 102% — waiting until 19:11 UTC
+15:37:12 5h window at 102% — waiting until 19:11 UTC
+15:37:21 5h window at 102% — waiting until 19:11 UTC
+15:38:46 5h window at 102% — waiting until 19:11 UTC
+10:55:04 round r1: tasks A,B,C arms bare,goalpost reps 2 model sonnet claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+10:55:04 skip C-jobq-goalpost-1: already has a result
+10:55:04 skip C-jobq-bare-1: already has a result
+10:55:04 skip B-textkit-goalpost-1: already has a result
+10:55:04 skip B-textkit-bare-1: already has a result
+10:55:04 skip A-ledger-bare-1: already has a result
+10:55:09 round r2: tasks D arms bare,goalpost reps 3 model sonnet claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+10:55:09 skip D-sheet-bare-3: already has a result
+10:55:09 skip D-sheet-goalpost-2: already has a result
+10:55:09 skip D-sheet-bare-2: already has a result
+10:55:09 skip D-sheet-goalpost-1: already has a result
+10:55:09 skip D-sheet-bare-1: already has a result
+10:55:11 start A-ledger-goalpost-1
+10:55:14 round r3: tasks A,B,C,D arms bare,goalpost reps 2 model haiku claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+10:55:14 skip B-textkit-bare-1: already has a result
+10:55:15 start D-sheet-goalpost-3
+10:55:21 start A-ledger-bare-1
+10:55:24 start A-ledger-bare-2
+10:55:35 start A-ledger-goalpost-1
+10:55:44 start A-ledger-goalpost-2
+10:55:55 start B-textkit-goalpost-1
+10:56:15 start C-jobq-bare-1
+10:57:21 end A-ledger-bare-2 exit=0 116s — grading
+10:57:45 done A-ledger-bare-2: score 1 (46/46) cost $0.3857915 turns 13
+10:57:45 start B-textkit-bare-2
+10:58:35 end C-jobq-bare-1 exit=0 140s — grading
+10:58:37 done C-jobq-bare-1: score 1 (25/25) cost $0.254361 turns 31
+10:58:37 start C-jobq-goalpost-1
+10:59:20 end B-textkit-bare-2 exit=0 95s — grading
+10:59:22 done B-textkit-bare-2: score 1 (34/34) cost $0.3433278 turns 22
+10:59:22 start B-textkit-goalpost-2
+10:59:35 end A-ledger-goalpost-1 exit=0 264s — grading
+11:00:01 done A-ledger-goalpost-1: score 1 (46/46) cost $0.7440269000000002 turns 31
+11:00:02 start C-jobq-bare-2
+11:00:02 end A-ledger-goalpost-2 exit=0 257s — grading
+11:00:32 done A-ledger-goalpost-2: score 1 (46/46) cost $0.7772900999999999 turns 30
+11:00:32 start C-jobq-goalpost-2
+11:01:17 end C-jobq-bare-2 exit=0 75s — grading
+11:01:19 done C-jobq-bare-2: score 1 (25/25) cost $0.284124 turns 14
+11:01:35 end A-ledger-bare-1 exit=0 374s — grading
+11:01:39 end B-textkit-goalpost-2 exit=0 137s — grading
+11:01:41 done B-textkit-goalpost-2: score 1 (34/34) cost $0.5147231999999999 turns 35
+11:01:55 done A-ledger-bare-1: score 0.913 (42/46) cost $0.7031875000000002 turns 63
+11:01:55 start D-sheet-bare-1
+11:02:57 end C-jobq-goalpost-2 exit=0 145s — grading
+11:02:59 done C-jobq-goalpost-2: score 1 (25/25) cost $0.5880936999999998 turns 1
+11:02:59 round r1 finished: A-ledger-bare-2=1, B-textkit-bare-2=1, A-ledger-goalpost-1=1, A-ledger-goalpost-2=1, C-jobq-bare-2=1, B-textkit-goalpost-2=1, C-jobq-goalpost-2=1
+11:03:08 end A-ledger-goalpost-1 exit=1 453s — grading
+11:03:08 invalid A-ledger-goalpost-1: cut off by the account rate limit — will retry
+11:03:08 5h window at 100% — waiting until 14:11 UTC
+11:03:09 end B-textkit-goalpost-1 exit=1 434s — grading
+11:03:09 invalid B-textkit-goalpost-1: cut off by the account rate limit — will retry
+11:03:09 5h window at 100% — waiting until 14:11 UTC
+11:03:09 end D-sheet-goalpost-3 exit=1 474s — grading
+11:03:09 invalid D-sheet-goalpost-3: cut off by the account rate limit — will retry
+11:03:09 5h window at 100% — waiting until 14:11 UTC
+11:03:10 end C-jobq-goalpost-1 exit=1 272s — grading
+11:03:10 invalid C-jobq-goalpost-1: cut off by the account rate limit — will retry
+11:03:10 5h window at 100% — waiting until 14:11 UTC
+11:03:57 end D-sheet-bare-1 exit=1 122s — grading
+11:03:57 invalid D-sheet-bare-1: cut off by the account rate limit — will retry
+11:03:57 5h window at 101% — waiting until 14:11 UTC
+11:33:16 5h window at 101% — waiting until 14:11 UTC
+11:33:17 5h window at 101% — waiting until 14:11 UTC
+11:33:23 5h window at 101% — waiting until 14:11 UTC
+11:33:30 5h window at 101% — waiting until 14:11 UTC
+11:34:04 5h window at 101% — waiting until 14:11 UTC
+12:03:24 5h window at 101% — waiting until 14:11 UTC
+12:03:24 5h window at 101% — waiting until 14:11 UTC
+12:03:31 5h window at 101% — waiting until 14:11 UTC
+12:03:39 5h window at 101% — waiting until 14:11 UTC
+12:04:10 5h window at 101% — waiting until 14:11 UTC
+12:33:30 5h window at 101% — waiting until 14:11 UTC
+12:33:30 5h window at 101% — waiting until 14:11 UTC
+12:33:36 5h window at 101% — waiting until 14:11 UTC
+12:33:44 5h window at 101% — waiting until 14:11 UTC
+12:34:16 5h window at 101% — waiting until 14:11 UTC
+13:03:37 5h window at 101% — waiting until 14:11 UTC
+13:03:38 5h window at 101% — waiting until 14:11 UTC
+13:03:43 5h window at 101% — waiting until 14:11 UTC
+13:03:49 5h window at 101% — waiting until 14:11 UTC
+13:04:23 5h window at 101% — waiting until 14:11 UTC
+13:33:44 5h window at 101% — waiting until 14:11 UTC
+13:33:45 5h window at 101% — waiting until 14:11 UTC
+13:33:52 5h window at 101% — waiting until 14:11 UTC
+13:34:00 5h window at 101% — waiting until 14:11 UTC
+13:34:28 5h window at 101% — waiting until 14:11 UTC
+14:03:50 5h window at 101% — waiting until 14:11 UTC
+14:03:50 5h window at 101% — waiting until 14:11 UTC
+14:03:57 5h window at 101% — waiting until 14:11 UTC
+14:04:05 5h window at 101% — waiting until 14:11 UTC
+14:04:34 5h window at 101% — waiting until 14:11 UTC
+14:11:36 start D-sheet-goalpost-3
+14:11:37 start D-sheet-goalpost-1
+14:11:44 start A-ledger-bare-2
+14:11:44 start A-ledger-goalpost-2
+14:11:45 start B-textkit-bare-2
+14:13:44 end B-textkit-bare-2 exit=0 119s — grading
+14:13:47 done B-textkit-bare-2: score 0.8235 (28/34) cost $0.18748284999999998 turns 34
+14:13:47 start B-textkit-goalpost-2
+14:15:56 end A-ledger-bare-2 exit=0 252s — grading
+14:16:30 done A-ledger-bare-2: score 0.8913 (41/46) cost $0.47041780000000016 turns 50
+14:16:30 start C-jobq-bare-2
+14:18:51 end C-jobq-bare-2 exit=0 141s — grading
+14:18:55 done C-jobq-bare-2: score 0.92 (23/25) cost $0.22467965 turns 31
+14:18:56 start C-jobq-goalpost-2
+14:20:50 end D-sheet-goalpost-3 exit=0 554s — grading
+14:20:53 done D-sheet-goalpost-3: score 1 (73/73) cost $1.6156512999999997 turns 1
+14:20:53 round r2 finished: D-sheet-goalpost-3=1
+14:26:41 end C-jobq-goalpost-2 exit=0 465s — grading
+14:26:44 done C-jobq-goalpost-2: score 0.96 (24/25) cost $0.6471024000000002 turns 1
+14:26:44 start D-sheet-bare-2
+14:27:26 end A-ledger-goalpost-2 exit=0 941s — grading
+14:28:01 done A-ledger-goalpost-2: score 0.8696 (40/46) cost $1.0304706 turns 85
+14:28:01 start D-sheet-goalpost-2
+14:32:00 end B-textkit-goalpost-2 exit=1 1093s — grading
+14:32:00 invalid B-textkit-goalpost-2: cut off by the account rate limit — will retry
+14:32:00 5h window at 100% — waiting until 19:11 UTC
+14:32:05 end D-sheet-goalpost-1 exit=1 1228s — grading
+14:32:05 invalid D-sheet-goalpost-1: cut off by the account rate limit — will retry
+14:32:05 5h window at 100% — waiting until 19:11 UTC
+14:32:13 end D-sheet-bare-2 exit=1 329s — grading
+14:32:13 invalid D-sheet-bare-2: cut off by the account rate limit — will retry
+14:32:13 5h window at 100% — waiting until 19:11 UTC
+14:32:44 end D-sheet-goalpost-2 exit=1 283s — grading
+14:32:44 invalid D-sheet-goalpost-2: cut off by the account rate limit — will retry
+14:32:44 5h window at 101% — waiting until 19:11 UTC
+15:02:10 5h window at 101% — waiting until 19:11 UTC
+15:02:18 5h window at 101% — waiting until 19:11 UTC
+15:02:23 5h window at 101% — waiting until 19:11 UTC
+15:02:51 5h window at 101% — waiting until 19:11 UTC
+15:32:17 5h window at 101% — waiting until 19:11 UTC
+15:32:24 5h window at 101% — waiting until 19:11 UTC
+15:32:29 5h window at 101% — waiting until 19:11 UTC
+15:32:58 5h window at 101% — waiting until 19:11 UTC
+16:02:24 5h window at 101% — waiting until 19:11 UTC
+16:02:30 5h window at 101% — waiting until 19:11 UTC
+16:02:35 5h window at 101% — waiting until 19:11 UTC
+16:03:04 5h window at 101% — waiting until 19:11 UTC
+16:32:30 5h window at 101% — waiting until 19:11 UTC
+16:32:36 5h window at 101% — waiting until 19:11 UTC
+16:32:42 5h window at 101% — waiting until 19:11 UTC
+16:33:10 5h window at 101% — waiting until 19:11 UTC
+17:02:40 5h window at 101% — waiting until 19:11 UTC
+17:02:49 5h window at 101% — waiting until 19:11 UTC
+17:02:56 5h window at 101% — waiting until 19:11 UTC
+17:03:17 5h window at 101% — waiting until 19:11 UTC
+17:32:50 5h window at 101% — waiting until 19:11 UTC
+17:32:58 5h window at 101% — waiting until 19:11 UTC
+17:33:04 5h window at 101% — waiting until 19:11 UTC
+17:33:25 5h window at 101% — waiting until 19:11 UTC
+18:02:58 5h window at 101% — waiting until 19:11 UTC
+18:03:04 5h window at 101% — waiting until 19:11 UTC
+18:03:11 5h window at 101% — waiting until 19:11 UTC
+18:03:33 5h window at 101% — waiting until 19:11 UTC
+18:33:03 5h window at 101% — waiting until 19:11 UTC
+18:33:09 5h window at 101% — waiting until 19:11 UTC
+18:33:16 5h window at 101% — waiting until 19:11 UTC
+18:33:37 5h window at 101% — waiting until 19:11 UTC
+08:19:49 round r3: tasks A,B,C,D arms bare,goalpost reps 2 model haiku claude=~\AppData\Roaming\npm\node_modules\@anthropic-ai\claude-code\bin\claude.exe
+08:19:49 skip C-jobq-goalpost-2: already has a result
+08:19:49 skip C-jobq-bare-2: already has a result
+08:19:49 skip B-textkit-bare-2: already has a result
+08:19:49 skip A-ledger-goalpost-2: already has a result
+08:19:49 skip A-ledger-bare-2: already has a result
+08:19:49 skip C-jobq-bare-1: already has a result
+08:19:49 skip B-textkit-bare-1: already has a result
+08:19:49 skip A-ledger-bare-1: already has a result
+08:19:57 start A-ledger-goalpost-1
+08:20:10 start B-textkit-goalpost-1
+08:20:30 start C-jobq-goalpost-1
+08:20:49 start D-sheet-bare-1
+08:29:27 end C-jobq-goalpost-1 exit=0 537s — grading
+08:29:31 done C-jobq-goalpost-1: score 0.96 (24/25) cost $0.6361408499999998 turns 20
+08:29:31 start D-sheet-goalpost-1
+08:32:54 end D-sheet-bare-1 exit=0 724s — grading
+08:33:22 done D-sheet-bare-1: score 0.8219 (60/73) cost $1.5056279999999997 turns 79
+08:33:22 start B-textkit-goalpost-2
+08:39:06 end B-textkit-goalpost-1 exit=0 1137s — grading
+08:39:12 done B-textkit-goalpost-1: score 0.9412 (32/34) cost $1.6753886999999996 turns 1
+08:39:12 start D-sheet-bare-2
+08:43:44 end B-textkit-goalpost-2 exit=0 622s — grading
+08:43:48 done B-textkit-goalpost-2: score 1 (34/34) cost $0.9520071000000001 turns 2
+08:43:48 start D-sheet-goalpost-2
+08:44:39 end D-sheet-goalpost-1 exit=0 908s — grading
+08:44:40 done D-sheet-goalpost-1: score 0.7534 (55/73) cost $1.4210210000000003 turns 71
+08:48:45 end A-ledger-goalpost-1 exit=0 1728s — grading
+08:49:18 done A-ledger-goalpost-1: score 0.9348 (43/46) cost $2.361123000000001 turns 1
+08:51:50 end D-sheet-bare-2 exit=0 758s — grading
+08:51:52 done D-sheet-bare-2: score 0.0411 (3/73) cost $1.5761500499999992 turns 91
+08:54:40 end D-sheet-goalpost-2 exit=1 651s — grading
+08:54:40 invalid D-sheet-goalpost-2: cut off by the account rate limit — will retry
+08:54:40 start D-sheet-goalpost-2
+08:54:50 end D-sheet-goalpost-2 exit=1 10s — grading
+08:54:50 invalid D-sheet-goalpost-2: cut off by the account rate limit — will retry
+08:54:50 start D-sheet-goalpost-2
+08:55:01 end D-sheet-goalpost-2 exit=1 11s — grading
+08:55:01 invalid D-sheet-goalpost-2: cut off by the account rate limit — will retry
+08:55:01 start D-sheet-goalpost-2
+08:55:11 end D-sheet-goalpost-2 exit=1 10s — grading
+08:55:11 invalid D-sheet-goalpost-2: cut off by the account rate limit — will retry
+08:55:11 round r3 finished: C-jobq-goalpost-1=0.96, D-sheet-bare-1=0.8219, B-textkit-goalpost-1=0.9412, B-textkit-goalpost-2=1, D-sheet-goalpost-1=0.7534, A-ledger-goalpost-1=0.9348, D-sheet-bare-2=0.0411
