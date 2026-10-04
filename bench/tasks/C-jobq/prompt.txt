@@ -1,0 +1,1 @@
+/goal Migrate jobq from callbacks to promises: every function and method in src/ returns a Promise (async/await) and takes no callback, and runWorker takes an async handler. Update the tests, examples/ and README to the new API. npm test must pass and node examples/basic.js must work.

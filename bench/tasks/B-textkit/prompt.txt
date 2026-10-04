@@ -1,0 +1,1 @@
+/goal Fix every issue in ISSUES.md. All tests must pass with npm test.

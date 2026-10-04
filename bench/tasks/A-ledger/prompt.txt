@@ -1,0 +1,1 @@
+/goal Build the project described in TASK.md completely. Everything it describes must work.

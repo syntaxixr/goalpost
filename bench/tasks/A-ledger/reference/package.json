@@ -1,0 +1,1 @@
+{ "name": "ledger", "version": "1.0.0", "private": true, "bin": { "ledger": "bin/ledger.js" }, "scripts": { "test": "node --test" } }

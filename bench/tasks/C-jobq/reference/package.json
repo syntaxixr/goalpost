@@ -1,0 +1,8 @@
+{
+  "name": "jobq",
+  "version": "1.4.0",
+  "description": "A tiny file-backed job queue with a worker loop",
+  "main": "src/index.js",
+  "scripts": { "test": "node --test" },
+  "license": "MIT"
+}
