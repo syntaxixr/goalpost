@@ -201,6 +201,10 @@ claude --plugin-dir ./plugin                          # попробовать �
 node bench/run-bench.js --round rX --tasks D --reps 3  # бенчмарк
 ```
 
+## Ещё по теме
+
+[Receipts](https://github.com/syntaxixr/receipts): проверяет, что тесты к фиксу упали бы без него, запуская их и на старом коде. Есть в каталоге плагинов Anthropic как Receipts Check. goalpost проверяет, что цель достигнута, Receipts проверяет, что тесты это доказывают.
+
 ## Лицензия
 
 MIT. Чьи идеи использованы, см. [CREDITS.md](CREDITS.md).

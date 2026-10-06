@@ -200,6 +200,10 @@ claude --plugin-dir ./plugin                          # try it without installin
 node bench/run-bench.js --round rX --tasks D --reps 3  # benchmark
 ```
 
+## See also
+
+[Receipts](https://github.com/syntaxixr/receipts): checks that the tests in a fix would have failed without it, by running them on the old code too. It is in Anthropic's plugin directory as Receipts Check. goalpost checks that the goal is done, Receipts checks that the tests prove it.
+
 ## License
 
 MIT. See [CREDITS.md](CREDITS.md) for the projects whose ideas this builds on.
