@@ -151,7 +151,7 @@ claude plugin marketplace update goalpost && claude plugin update goalpost@goalp
 
 ## Бенчмарк
 
-33 настоящих прогона (Sonnet 5.5 и Haiku 4.5), 4 задачи, скрытые грейдеры, каждый прогон оценён 3 раза ([полный отчёт](docs/BENCHMARK.md)):
+33 настоящих прогона (Sonnet 5.5 и Haiku 4.5), 4 задачи, скрытые грейдеры, каждый прогон оценён 3 раза ([полный отчёт](docs/BENCHMARK.md), все прогоны есть [датасетом на Hugging Face](https://huggingface.co/datasets/syntaxixr/goalpost-benchmark)):
 
 | | голый `/goal` | `/goal` + goalpost |
 | --- | --- | --- |

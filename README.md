@@ -151,7 +151,7 @@ Full notes on every project: [docs/RESEARCH.md](docs/RESEARCH.md).
 
 ## Benchmark
 
-33 real runs (Sonnet 5.5 and Haiku 4.5), 4 tasks, hidden graders, each run graded 3 times ([full report](docs/BENCHMARK.md)):
+33 real runs (Sonnet 5.5 and Haiku 4.5), 4 tasks, hidden graders, each run graded 3 times ([full report](docs/BENCHMARK.md), every run as a [dataset on Hugging Face](https://huggingface.co/datasets/syntaxixr/goalpost-benchmark)):
 
 | | bare `/goal` | `/goal` + goalpost |
 | --- | --- | --- |
