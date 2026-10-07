@@ -131,6 +131,8 @@ claude plugin marketplace update goalpost && claude plugin update goalpost@goalp
 Один конфиг: `~/.claude/goalpost.json` (для всех проектов) или `.claude/goalpost.json` (для одного).
 Все настройки с умолчаниями лежат в [examples/goalpost.json](examples/goalpost.json): лимиты блокировок,
 включение аудита, интервал напоминаний, маски тестов, защищённые пути, таймаут и оболочка для verify.
+Чтобы экономить токены на мелких целях, `"auditMinCriteria": 3` пропускает аудит, если критериев меньше
+трёх, ни один не ручной и в "## Test changes" ничего не объявлено.
 
 ## Чем отличается
 
@@ -171,7 +173,9 @@ claude plugin marketplace update goalpost && claude plugin update goalpost@goalp
 
 - **Это стоит времени.** ТЗ, проверки и аудит добавляют ходы. В бенчмарке ветка с goalpost шла
   примерно вдвое дольше и дороже голого `/goal` (Sonnet: 5,2 против 2,7 мин, $0,91 против $0,46). На мелкой задаче это лишнее:
-  `/goalpost:off` или `GOALPOST=off claude`.
+  `/goalpost:off`, `GOALPOST=off claude` или `"auditMinCriteria": 3`, чтобы не гонять аудит на мелких целях.
+  С 07.10.2026 записи в PROGRESS.md больше не держат сессию, инструкция короче, а аудитор делает работу
+  пачками; полный бенчмарк на этой версии ещё не перепроверен.
 - **Сильные модели часто и так доделывают.** На Sonnet 5.5 и задачах среднего размера голый `/goal` уже
   давал почти 100%. Польза goalpost видна там, где модель срезает углы. Цифры, включая прогоны, где
   goalpost ничего не изменил, в [BENCHMARK.md](docs/BENCHMARK.md).

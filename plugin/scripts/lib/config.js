@@ -15,13 +15,16 @@ const DEFAULTS = Object.freeze({
   // Require a fresh-eyes audit by the goalpost:auditor subagent before the goal may stop.
   requireAudit: true,
   auditAgent: 'goalpost:auditor',
+  // Skip the audit for goals with fewer criteria than this, unless a criterion is manual or tests are
+  // declared under "## Test changes" (0 = always audit). Saves a subagent run on small goals.
+  auditMinCriteria: 0,
   // Loop safety. A "no-progress" block is one where Claude used no tool since the previous block.
   maxNoProgressBlocks: 3,
   // Total Stop blocks per goal before goalpost gives up and lets Claude stop (0 = unlimited).
   maxBlocks: 80,
   // Wall-clock budget per goal in minutes (0 = unlimited).
   maxMinutes: 0,
-  // Ask for a PROGRESS.md update after this many file edits without one.
+  // Suggest a PROGRESS.md update after this many file edits without one (a hint, never a blocker).
   progressEveryEdits: 15,
   // Anti-drift reminder of the remaining criteria every N tool calls (0 = off).
   reminderEveryToolCalls: 25,

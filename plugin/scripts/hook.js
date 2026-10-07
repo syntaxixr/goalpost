@@ -347,8 +347,8 @@ function onStop(root, input, cfg) {
   const status = computeStatus(root, st, cfg);
   if (status.complete) {
     appendEvidence(root, { kind: 'done', criteria: status.total, audit: st.audit && st.audit.verdict });
-    release(root, st, 'all criteria verified' + (cfg.requireAudit ? ' and audited' : ''), { phase: 'done' });
-    return { systemMessage: `goalpost: done — ${statusLine(status)}${cfg.requireAudit ? ', audit PASS' : ''}.` };
+    release(root, st, 'all criteria verified' + (status.needsAudit ? ' and audited' : ''), { phase: 'done' });
+    return { systemMessage: `goalpost: done — ${statusLine(status)}${status.needsAudit ? ', audit PASS' : ''}.` };
   }
 
   // Loop safety: give up gracefully instead of being overridden by Claude Code's own cap.

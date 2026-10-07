@@ -131,6 +131,8 @@ A real SPEC and audit from a small run are in [examples/](examples/).
 One config file, `~/.claude/goalpost.json` (all projects) or `.claude/goalpost.json` (one project).
 Every setting and its default is in [examples/goalpost.json](examples/goalpost.json): block limits,
 audit on/off, reminder interval, test globs, protected paths, verify timeout and shell.
+To save tokens on small goals, `"auditMinCriteria": 3` skips the audit for goals with fewer than three
+criteria, unless one of them is manual or tests are declared under "## Test changes".
 
 ## How it differs
 
@@ -171,7 +173,9 @@ tasks the accuracy gain is small (one run).
 
 - **It costs time.** Writing a spec, running checks and an audit take extra turns. In the benchmark the
   goalpost arm took about 2× the wall time and API cost of bare `/goal` (Sonnet: 5.2 vs 2.7 min, $0.91 vs $0.46 per run). On a small goal that's
-  overhead you may not want: `/goalpost:off` or `GOALPOST=off claude`.
+  overhead you may not want: `/goalpost:off`, `GOALPOST=off claude`, or `"auditMinCriteria": 3` to skip the
+  audit on small goals. Since 2026-10-07 PROGRESS.md notes no longer hold the session open, the protocol is
+  shorter, and the auditor batches its work; the full benchmark has not been re-run on this version yet.
 - **Strong models often finish anyway.** With Sonnet 5.5 on mid-sized tasks, bare `/goal` already
   scored near 100%. goalpost's gains show up when the model takes shortcuts. The numbers are in
   [BENCHMARK.md](docs/BENCHMARK.md), including the runs where goalpost changed nothing.

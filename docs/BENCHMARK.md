@@ -68,6 +68,29 @@ How to read this, without spin:
   "met", but concurrent writes failed intermittently (EPERM on rename, 1–2 of 3 grades). Both goalpost
   C runs on Sonnet passed all 3 grades.
 
+## Audit probe: does the auditor catch half-done work?
+
+`node bench/audit-probe.js --model haiku --reps 2` builds a small repository where both Verify commands
+pass but the work is half done: `mul()` special-cases the test input and carries a TODO, division by zero
+must throw a RangeError and nothing checks it, and the README documents two of the four functions behind a
+bare `grep` criterion. A good auditor returns FAIL. `--variant done` is the control: the same goal really
+done, with criteria that cover it, where a good auditor returns PASS. Asked for by a reader on r/LLMDevs.
+
+| Model | Auditor | Work | Verdict | Found all 3 problems | Auditor tool calls | Auditor messages | Run cost |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Sonnet 5.5 | before 2026-10-07 | half done | FAIL | yes | 8 | 4 | $0.21 |
+| Sonnet 5.5 | current | half done | FAIL | yes | 5 | 4 | $0.21 |
+| Sonnet 5.5 | current | done | PASS | — | 10 | 5 | $0.21 |
+| Haiku 4.5 | before 2026-10-07 (2 runs) | half done | FAIL, FAIL | yes, yes | 15, 14 | 10, 12 | $0.072, $0.074 |
+| Haiku 4.5 | current (2 runs) | half done | FAIL, FAIL | yes, yes | 12, 14 | 8, 11 | $0.057, $0.058 |
+| Haiku 4.5 | current | done | PASS | — | 15 | 11 | $0.072 |
+
+Both auditors caught everything, and neither failed the honest version. The current one batches its work
+(reads in one message, `verify.js` and `git` in one shell call), which made the Haiku audit about 20%
+cheaper here. A first rewrite that only listed more steps was more expensive (18 tool calls on Haiku) and was
+dropped. Run cost includes the headless session that starts the auditor. These are single small runs, not a
+benchmark of their own.
+
 ## Summary by model, task and arm
 
 | Model | Task | Arm | Runs | Hidden checks (mean) | Worst run | Runs at 100% | "Done" while checks failed | Wall time (mean) | Cost (mean) |

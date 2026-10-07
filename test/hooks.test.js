@@ -231,6 +231,56 @@ test('Stop: a code edit after verification makes the evidence stale', (t) => {
   assert.match(r.json.reason, /out of date/);
 });
 
+// Build and verify without ever touching PROGRESS.md.
+function buildWithoutNotes(proj, spec = SPEC_OK) {
+  proj.write('.goal/SPEC.md', spec);
+  proj.write('src/add.js', 'module.exports=(a,b)=>a+b;');
+  runHook(proj, 'PostToolUse', W(proj, 'src/add.js'));
+  proj.write('README.md', 'add(a, b) adds numbers');
+  runHook(proj, 'PostToolUse', W(proj, 'README.md'));
+  return runVerify(proj);
+}
+
+test('Stop: PROGRESS.md is a hint, never a reason to keep going', (t) => {
+  const proj = tmpProject();
+  t.after(proj.cleanup);
+  startGoal(proj);
+  assert.equal(buildWithoutNotes(proj).status, 0);
+  runHook(proj, 'SubagentStop', { agent_type: 'goalpost:auditor', agent_id: 'a1', last_assistant_message: 'AC-1: PASS\nAC-2: PASS\nCoverage: PASS\nGaming: PASS\nVERDICT: PASS' });
+  const r = runHook(proj, 'Stop', {});
+  assert.equal(r.json.decision, undefined, r.json.reason);
+  assert.match(r.json.systemMessage, /done/);
+});
+
+test('Stop: auditMinCriteria lets small goals skip the audit, unless a check is manual', (t) => {
+  const proj = tmpProject();
+  t.after(proj.cleanup);
+  fs.writeFileSync(proj.userCfg, JSON.stringify({ auditMinCriteria: 3 }));
+  startGoal(proj);
+  assert.equal(buildWithoutNotes(proj).status, 0);
+  const r = runHook(proj, 'Stop', {});
+  assert.equal(r.json.decision, undefined, r.json.reason);
+  assert.match(r.json.systemMessage, /done/);
+  assert.doesNotMatch(r.json.systemMessage, /audit/);
+
+  const proj2 = tmpProject();
+  t.after(proj2.cleanup);
+  fs.writeFileSync(proj2.userCfg, JSON.stringify({ auditMinCriteria: 3 }));
+  startGoal(proj2);
+  buildWithoutNotes(proj2, SPEC_OK + '- [ ] AC-3: the README reads well\n  - Verify: manual — read README.md\n');
+  const r2 = runHook(proj2, 'Stop', {});
+  assert.equal(r2.json.decision, 'block');
+  assert.match(r2.json.reason, /independent audit/);
+});
+
+test('UserPromptSubmit: the protocol stays short (it is re-read on every turn)', (t) => {
+  const proj = tmpProject();
+  t.after(proj.cleanup);
+  const ctx = startGoal(proj).json.hookSpecificOutput.additionalContext;
+  assert.ok(ctx.length < 3600, `protocol is ${ctx.length} chars`);
+  assert.doesNotMatch(ctx, /STATUS \d/, 'no per-reply status line');
+});
+
 test('Stop: failing check shows its output', (t) => {
   const proj = tmpProject();
   t.after(proj.cleanup);

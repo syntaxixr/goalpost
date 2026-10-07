@@ -10,27 +10,28 @@ function protocol({ condition, protectedFiles, cfg, resumed }) {
   const testNote = cfg.protectExistingTests && tests.length
     ? `the ${tests.length} test file(s) that existed when the goal started (e.g. ${tests.slice(0, 3).join(', ')})`
     : 'any test files listed in SPEC.md';
+  const small = cfg.auditMinCriteria > 0 ? ` A goal with fewer than ${cfg.auditMinCriteria} criteria, none of them manual and no test changes, needs no audit.` : '';
   const lines = [
     `goalpost (a Claude Code plugin the user installed) is ${resumed ? 'still ' : ''}active for this /goal. Its files live in .goal/ at the project root.`,
     `Goal: ${clip(condition, 600)}`,
     '',
     'How goals run in this project:',
-    '1. Spec before code. .goal/SPEC.md has a template: the goal verbatim, written assumptions (an open question gets a reasonable decision written down, not a question to the user), milestones for bigger work, and acceptance criteria. Each criterion is an observable outcome plus a command that exits 0 only when it holds, for example:',
+    '1. Spec first. Fill in .goal/SPEC.md: assumptions (an open question gets a reasonable decision, not a question to the user) and acceptance criteria, one per requirement in the goal and in any file it points to. Each criterion is an observable outcome plus a command that exits 0 only when it holds:',
     '   - [ ] AC-1: GET /health returns 200 with {"ok":true}',
     '     - Verify: `npm test -- health`',
-    '   The criteria cover every requirement in the goal and in any file the goal points to, one criterion per requirement. A check that needs human judgment is written `- Verify: manual — <what to look at>`; the auditor judges those.' +
-      (cfg.specFirst ? ' Edits to project files are blocked until SPEC.md has at least one criterion.' : ''),
+    '   Use `- Verify: manual — <what to look at>` only for what no command can check; the auditor judges those. Keep the spec short: one line per criterion, no prose.' +
+      (cfg.specFirst ? ' Project files stay locked until SPEC.md has at least one criterion.' : ''),
     cfg.freezeSpec
-      ? '2. The spec freezes at the first project-file edit. After that, criteria can be added but not removed or reworded unless "## Spec changes" names the criterion and says why.'
+      ? '2. The criteria freeze at the first project-file edit. After that they can be added, not removed or reworded, unless "## Spec changes" names the criterion and says why.'
       : '2. Criteria are kept stable; any change is explained under "## Spec changes".',
-    `3. Checks run through \`${VERIFY_CMD}\` (all) or \`${VERIFY_CMD} AC-2 AC-5\`. It runs the Verify commands, records exit codes in .goal/evidence.log and ticks or unticks the boxes in SPEC.md. A criterion counts as done only when its latest check passed after the latest code edit. evidence.log, state.json, verify.js and AUDIT.md are written by goalpost only. For a slow suite, give the Bash call a long timeout.`,
-    `4. Read-only while the goal runs: ${testNote}, plus anything under "## Protected" in SPEC.md. An existing test that the goal really must change (an API migration, a removed feature) is listed under "## Test changes" with the reason; the auditor reviews those changes. A check passed by editing, skipping or special-casing a test, or by hardcoding the expected output, counts as not done.`,
-    '5. After each meaningful step: one line in .goal/PROGRESS.md (done / next / blockers), and the reply ends with a status line such as `STATUS 3/7 verified — next: AC-4`.',
+    `3. \`${VERIFY_CMD}\` runs every check in one call and records the results (\`${VERIFY_CMD} AC-2\` for one). A criterion counts only if its latest check passed after the latest code edit, so run it after a batch of edits, not after each one. goalpost writes evidence.log, state.json, verify.js and AUDIT.md itself. Give a slow suite a long Bash timeout.`,
+    `4. Read-only while the goal runs: ${testNote}, plus anything under "## Protected" in SPEC.md. An existing test the goal really must change (an API migration, a removed feature) goes under "## Test changes" with the reason; the auditor reviews it. A check passed by editing, skipping or special-casing a test, or by hardcoding the expected output, does not count.`,
+    '5. .goal/PROGRESS.md is for picking the work up again after a context compaction. A line at each milestone is enough.',
     cfg.requireAudit
-      ? `6. When every criterion passes, the auditor subagent (Agent tool, subagent_type "${cfg.auditAgent}") reviews the work with fresh eyes. Stopping is blocked until it returns VERDICT: PASS for the current code.`
+      ? `6. When every criterion passes, run the auditor subagent once (Agent tool, subagent_type "${cfg.auditAgent}") with a one-line prompt such as "Audit .goal/SPEC.md". Stopping is blocked until it returns VERDICT: PASS for the current code.${small}`
       : '6. Before finishing, every criterion is re-checked against the current code.',
-    `7. When the same error comes back ${cfg.sameErrorThreshold} times, the approach changes: a different strategy, a smaller step, or reading the source/docs.`,
-    '8. A blocker only the user can remove (credentials, access, a product decision) goes into .goal/BLOCKED.md, starting with a line "USER: <what you need>". That is the one way to stop early. A check that cannot pass as written, a failing audit or a spec problem is not a blocker: fix the Verify command (recorded under "## Spec changes") or the code. Everything else is decided and recorded as an assumption.',
+    `7. When the same error comes back ${cfg.sameErrorThreshold} times, change the approach: a different strategy, a smaller step, or the source and docs.`,
+    '8. A blocker only the user can remove (credentials, access, a product decision) goes into .goal/BLOCKED.md, starting with a line "USER: <what you need>". That is the one way to stop early. A check that cannot pass as written, a failing audit or a spec problem is yours to fix (record a changed Verify command under "## Spec changes").',
   ];
   return lines.join('\n');
 }
@@ -42,30 +43,18 @@ ${condition}
 
 ## Assumptions
 
-<!-- Open questions answered with a reasonable decision. One line each. -->
-
-## Milestones
-
-<!-- For bigger goals: M1, M2, ... each ending in something you can check. -->
+<!-- One line per decision. -->
 
 ## Acceptance criteria
 
-<!-- One per requirement. Each has an observable outcome and a Verify command that exits 0 only when it holds.
-- [ ] AC-1: <observable outcome>
-  - Verify: \`<command>\`
--->
+<!-- - [ ] AC-1: <observable outcome>
+       - Verify: \`<command that exits 0 only when it holds>\` -->
 
 ## Protected
 
-<!-- Paths/globs that must not change while the goal runs (existing tests are protected automatically). -->
-
 ## Test changes
 
-<!-- Existing tests this goal legitimately has to change, one per line with the reason. The auditor reviews them. -->
-
 ## Spec changes
-
-<!-- After the freeze: why a criterion was reworded or dropped, naming its id. -->
 `;
 }
 

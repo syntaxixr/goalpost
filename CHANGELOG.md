@@ -35,3 +35,16 @@
 - Benchmark: 33 valid runs; per-task means so arms with unequal run counts compare fairly.
 - Demo video built from two real runs (docs/media, `node docs/media/make-video.mjs`).
 - README banner and teaser GIF (`node docs/media/make-banner.mjs`).
+
+## 2026-10-07
+
+- Fewer tokens: `.goal/PROGRESS.md` is a hint now, never a reason to keep the session going (every extra turn
+  re-reads the whole context); no per-reply status line; a shorter protocol and SPEC template; `verify.js`
+  is run once after a batch of edits.
+- The auditor batches its work: reads in one message, `node .goal/verify.js` and `git` in one shell call, and
+  a re-audit starts from the previous FAIL lines instead of from scratch.
+- `auditMinCriteria` (default 0 = always audit) skips the audit for small goals, unless a criterion is manual
+  or tests are declared under "## Test changes".
+- `bench/audit-probe.js`: a half-done repository where every check is green (the auditor must FAIL) and a
+  done control (it must PASS). Results in docs/BENCHMARK.md.
+- docs/BENCHMARK.md: run-to-run spread, and how much of the Haiku gain comes from one task.

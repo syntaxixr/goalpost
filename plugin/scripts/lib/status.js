@@ -61,18 +61,19 @@ function computeStatus(root, state, cfg) {
   const passing = byKind.pass.length;
   const allAutomatedPass = criteria.length > 0 && byKind.pass.length === automated.length && automated.length + byKind.manual.length === criteria.length;
 
-  // PROGRESS.md discipline.
+  // PROGRESS.md only helps after compaction. It is advice, never a reason to keep the session going:
+  // every extra turn re-reads the whole context.
+  const advice = [];
   const progressMtime = mtimeMs(p.progress);
   const progressTouched = progressMtime > (state.startedMs || 0) || (state.progressUpdatedAt || 0) > (state.startedMs || 0);
-  if (state.edits > 0 && !progressTouched) {
-    problems.push({ kind: 'progress', msg: '.goal/PROGRESS.md has not been updated since the goal started. Add what is done, what is next and any blockers.' });
-  } else if (cfg.progressEveryEdits > 0 && state.editsSinceProgress >= cfg.progressEveryEdits) {
-    problems.push({ kind: 'progress', msg: `.goal/PROGRESS.md is behind: ${state.editsSinceProgress} file edits since the last update.` });
+  if (cfg.progressEveryEdits > 0 && state.editsSinceProgress >= cfg.progressEveryEdits) {
+    advice.push({ kind: 'progress', msg: `.goal/PROGRESS.md ${progressTouched ? 'is behind' : 'is still empty'}: ${state.editsSinceProgress} file edits since the last update.` });
   }
 
-  // Fresh-eyes audit, only once everything else is green.
-  let auditOk = !cfg.requireAudit;
-  if (cfg.requireAudit && allAutomatedPass && problems.length === 0) {
+  // Fresh-eyes audit, only once everything else is green. Small goals can skip it (auditMinCriteria).
+  const needsAudit = cfg.requireAudit && (criteria.length >= (cfg.auditMinCriteria || 0) || byKind.manual.length > 0 || spec.testChanges.length > 0);
+  let auditOk = !needsAudit;
+  if (needsAudit && allAutomatedPass && problems.length === 0) {
     const a = state.audit;
     if (!a) {
       problems.push({ kind: 'audit', msg: `All ${automated.length} automated checks pass. Last step: an independent audit. Launch the auditor subagent (Agent tool, subagent_type "${cfg.auditAgent}") and ask it to audit .goal/SPEC.md. Stopping is allowed once it returns VERDICT: PASS.` });
@@ -83,7 +84,7 @@ function computeStatus(root, state, cfg) {
     } else {
       auditOk = true;
     }
-  } else if (cfg.requireAudit && state.audit && state.audit.verdict === 'PASS' && (state.audit.atMs || 0) >= (state.lastEditAt || 0)) {
+  } else if (needsAudit && state.audit && state.audit.verdict === 'PASS' && (state.audit.atMs || 0) >= (state.lastEditAt || 0)) {
     auditOk = true;
   }
 
@@ -93,6 +94,8 @@ function computeStatus(root, state, cfg) {
     criteria,
     statusById: st,
     problems,
+    advice,
+    needsAudit,
     done,
     total: criteria.length,
     passing,

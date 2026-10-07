@@ -4,6 +4,7 @@
   "freezeSpec": true,
   "requireAudit": true,
   "auditAgent": "goalpost:auditor",
+  "auditMinCriteria": 0,
   "maxNoProgressBlocks": 3,
   "maxBlocks": 80,
   "maxMinutes": 0,
