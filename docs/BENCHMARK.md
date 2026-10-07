@@ -25,6 +25,7 @@ How to read this, without spin:
   79.8% to 89.7%, and the worst case (task D, a 73-check spreadsheet engine) from 43% to 75%. But only 1 of
   7 Haiku runs with goalpost was fully correct, and 5 of 7 ended "done" with hidden checks still failing:
   the auditor is a Haiku subagent too, and it can wave things through. It took about 2.6× the time.
+- **Runs vary a lot, and the Haiku gain leans on one task.** With two runs per task, the same prompt gave plain Haiku 82% and 4% on the spreadsheet task. Without that task the Haiku means are 92.0% (plain) and 94.4% (goalpost), so most of the 79.8% → 89.7% gap comes from the spreadsheet engine. The three grades per run measure flaky code, not grader noise: the graders are plain test scripts, and the only run whose grades disagreed had a real race in the agent's code.
 - **Unequal run counts.** The account's rate limit cut several runs. Haiku goalpost has 7 runs against 8
   bare (one D run is missing), which is why the table uses per-task means. Every run that was cut off is
   listed under "Runs thrown out" at the bottom; none was dropped because of how it was going.
