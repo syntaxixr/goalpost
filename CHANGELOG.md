@@ -48,3 +48,9 @@
 - `bench/audit-probe.js`: a half-done repository where every check is green (the auditor must FAIL) and a
   done control (it must PASS). Results in docs/BENCHMARK.md.
 - docs/BENCHMARK.md: run-to-run spread, and how much of the Haiku gain comes from one task.
+
+## 2026-10-10
+
+- `/goalpost:selftest` (`node plugin/scripts/gp.js selftest`): proves the hooks enforce on this machine by driving
+  them through a throwaway goal whose check fails first. Suggested by a reader on r/SideProject.
+

@@ -459,3 +459,12 @@ test('hooks are fast on the no-goal path', (t) => {
   t.diagnostic(`median no-goal PostToolUse latency: ${median.toFixed(0)} ms (includes node startup)`);
   assert.ok(median < 1500, `too slow: ${median} ms`);
 });
+
+test('gp.js selftest drives the real hooks through block, fix, audit and done', () => {
+  const { spawnSync } = require('child_process');
+  const path = require('path');
+  const r = spawnSync(process.execPath, [path.join(__dirname, '..', 'plugin', 'scripts', 'gp.js'), 'selftest'], { encoding: 'utf8' });
+  assert.equal(r.status, 0, r.stdout + r.stderr);
+  assert.equal((r.stdout.match(/^PASS /gm) || []).length, 7, r.stdout);
+  assert.doesNotMatch(r.stdout, /^FAIL /m);
+});

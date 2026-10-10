@@ -69,6 +69,16 @@ claude plugin install goalpost@goalpost
 Then start a **new** Claude Code session and use `/goal` as usual. To try it without installing:
 `claude --plugin-dir ./plugin`.
 
+### Check that it really enforces
+
+Before trusting it with real work, run `/goalpost:selftest` in Claude Code (or
+`node plugin/scripts/gp.js selftest` from a clone). It drives the real hooks through a throwaway goal: an edit
+before the spec is blocked, a failing check blocks the stop and names the criterion, the fix passes, the stop
+then waits for the audit, and only after an audit PASS is Claude allowed to stop. Every step prints PASS or
+FAIL, and it shows where the evidence log lives. Then, in a real session, `/goalpost:status` after a
+`/goal` should show the goal as active; if it says there is no goal, Claude Code is not running the hooks
+(usually `node` is not on PATH).
+
 ### Update and uninstall
 
 ```bash
@@ -127,6 +137,7 @@ A real SPEC and audit from a small run are in [examples/](examples/).
 | `/goalpost:status` | Criteria, checks, audit and open items of the current goal |
 | `/goalpost:off` / `/goalpost:on` | Global switch. Also `GOALPOST=off` in the environment |
 | `/goalpost:release` | Stop enforcing the current goal (the built-in `/goal` keeps running) |
+| `/goalpost:selftest` | Prove the hooks enforce on this machine, on a throwaway goal |
 
 One config file, `~/.claude/goalpost.json` (all projects) or `.claude/goalpost.json` (one project).
 Every setting and its default is in [examples/goalpost.json](examples/goalpost.json): block limits,
