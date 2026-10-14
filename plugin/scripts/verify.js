@@ -115,6 +115,8 @@ function main(argv) {
     console.log(`\nSTATUS ${statusLine(status)}`);
     const open = status.problems.filter((pr) => pr.kind !== 'progress').slice(0, 5);
     if (open.length) console.log('Open:\n' + open.map((pr) => `- ${clip(pr.msg.split('\n')[0], 200)}`).join('\n'));
+    const nf = (status.advice || []).find((a) => a.kind === 'never_failed');
+    if (nf) console.log(`Never failed during this goal: ${nf.ids.join(', ')} (make sure these checks can fail).`);
   } else {
     console.log(`\n${runnable.length - failed}/${runnable.length} checks passed.`);
   }

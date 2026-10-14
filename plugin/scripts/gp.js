@@ -37,6 +37,7 @@ function status(root) {
     lines.push('Open items:');
     for (const pr of s.problems.slice(0, 8)) lines.push(`- ${clip(pr.msg.split('\n')[0], 220)}`);
   }
+  for (const a of s.advice || []) lines.push(`Note: ${clip(a.msg, 260)}`);
   lines.push(`Files: ${path.relative(root, goalPaths(root).dir)}/SPEC.md, PROGRESS.md, evidence.log`);
   return lines.join('\n');
 }

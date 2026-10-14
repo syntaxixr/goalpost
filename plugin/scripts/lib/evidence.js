@@ -66,4 +66,23 @@ function criteriaStatus(criteria, evidence, state) {
   return result;
 }
 
-module.exports = { appendEvidence, readEvidence, criteriaStatus };
+// Automated criteria whose current check has run in this goal and never failed once. That fits work
+// done right the first time, and it also fits a check that can't fail: from outside the two look alike.
+function neverFailed(criteria, evidence, state) {
+  const startedMs = (state && state.startedMs) || 0;
+  const ran = {};
+  const failed = {};
+  for (const r of evidence) {
+    if (r.kind !== 'verify' || !r.id) continue;
+    if ((Date.parse(r.start || r.t) || 0) < startedMs) continue;
+    const key = `${r.id}\n${normalize(r.cmd)}`;
+    ran[key] = true;
+    if (r.exit !== 0) failed[key] = true;
+  }
+  return criteria
+    .filter((c) => !c.manual && c.verify)
+    .filter((c) => { const key = `${c.id}\n${normalize(c.verify)}`; return ran[key] && !failed[key]; })
+    .map((c) => c.id);
+}
+
+module.exports = { appendEvidence, readEvidence, criteriaStatus, neverFailed };

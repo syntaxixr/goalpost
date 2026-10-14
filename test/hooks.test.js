@@ -468,3 +468,21 @@ test('gp.js selftest drives the real hooks through block, fix, audit and done', 
   assert.equal((r.stdout.match(/^PASS /gm) || []).length, 7, r.stdout);
   assert.doesNotMatch(r.stdout, /^FAIL /m);
 });
+
+test('verify.js names the criteria whose check never failed during the goal', (t) => {
+  const proj = tmpProject();
+  t.after(proj.cleanup);
+  startGoal(proj);
+  proj.write('.goal/SPEC.md', SPEC_OK);
+  proj.write('src/add.js', 'module.exports=(a,b)=>a-b;');
+  runHook(proj, 'PostToolUse', W(proj, 'src/add.js'));
+  proj.write('README.md', 'add(a, b) adds numbers');
+  runHook(proj, 'PostToolUse', W(proj, 'README.md'));
+  const first = runVerify(proj);
+  assert.notEqual(first.status, 0);
+  proj.write('src/add.js', 'module.exports=(a,b)=>a+b;');
+  runHook(proj, 'PostToolUse', W(proj, 'src/add.js'));
+  const second = runVerify(proj);
+  assert.equal(second.status, 0, second.stdout);
+  assert.match(second.stdout, /Never failed during this goal: AC-2 \(/, 'AC-1 failed once, AC-2 never did');
+});

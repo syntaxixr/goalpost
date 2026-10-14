@@ -2,7 +2,7 @@
 // "Is this goal really done?" — computed from files on disk, never from what the model says.
 const { goalPaths } = require('./state');
 const { parseSpec, tampered } = require('./spec');
-const { readEvidence, criteriaStatus } = require('./evidence');
+const { readEvidence, criteriaStatus, neverFailed } = require('./evidence');
 const { readText, mtimeMs, clip, lastLines } = require('./util');
 
 const VERIFY_CMD = 'node .goal/verify.js';
@@ -68,6 +68,10 @@ function computeStatus(root, state, cfg) {
   const progressTouched = progressMtime > (state.startedMs || 0) || (state.progressUpdatedAt || 0) > (state.startedMs || 0);
   if (cfg.progressEveryEdits > 0 && state.editsSinceProgress >= cfg.progressEveryEdits) {
     advice.push({ kind: 'progress', msg: `.goal/PROGRESS.md ${progressTouched ? 'is behind' : 'is still empty'}: ${state.editsSinceProgress} file edits since the last update.` });
+  }
+  const unproven = neverFailed(criteria, evidence, state).filter((id) => st[id] && st[id].status === 'pass');
+  if (unproven.length) {
+    advice.push({ kind: 'never_failed', ids: unproven, msg: `${unproven.join(', ')} never failed a check during this goal. That fits work done right the first time, and also a check that can't fail; make sure each of these checks would fail if the behaviour were missing.` });
   }
 
   // Fresh-eyes audit, only once everything else is green. Small goals can skip it (auditMinCriteria).

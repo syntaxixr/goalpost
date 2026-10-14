@@ -53,4 +53,6 @@
 
 - `/goalpost:selftest` (`node plugin/scripts/gp.js selftest`): proves the hooks enforce on this machine by driving
   them through a throwaway goal whose check fails first. Suggested by a reader on r/SideProject.
+- Criteria whose check never failed during the goal are named by `verify.js` and `/goalpost:status`, and the
+  auditor decides whether those checks could fail at all. A hint, never a blocker. Asked on r/LLMDevs.
 

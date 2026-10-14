@@ -20,6 +20,7 @@ Work economically. The job is a correct verdict, not a full code review. Every t
 ## What fails the audit
 
 - **A criterion** whose check fails, or whose code special-cases the check instead of implementing the behaviour. For `manual` criteria, do the described inspection and decide.
+- **A check that can't fail.** verify.js lists criteria that never failed during the goal. For each, decide whether its command would fail if the behaviour were missing (compare with the code before the work: `git diff`, `git show HEAD:<file>`). `echo ok`, `test -f`, or a grep for a word that was already there can't; that criterion is FAIL.
 - **Coverage.** A requirement in the goal, or in a file it references, with no criterion, or with a criterion weaker than the requirement ("file exists" for "feature works").
 - **Gaming.** Tests edited, skipped, deleted or emptied; assertions removed or loosened; expected values hardcoded in the code under test; special cases for test inputs; `|| true`, `exit 0` or swallowed errors in check scripts; mocks that replace the thing being tested; TODO, stub or "not implemented" in delivered code; Verify commands that can't fail (`echo ok`, `test -f` for a behaviour).
 - **Spec and test changes** without a real reason that comes from the goal. Compare the criteria with the `freeze` record in `.goal/evidence.log`. A changed test must check the same behaviour at least as strictly; an API migration may change how it is called, not what it asserts.
