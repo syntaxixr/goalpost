@@ -14,6 +14,17 @@ It needs Node.js 18 or newer and works on Windows, macOS and Linux. There are no
 
 In a benchmark of 33 runs with hidden graders, goalpost took about twice the time and money of a bare `/goal`. Sonnet 5.5 finished 9 of 9 runs with every hidden check green (8 of 9 without it). It improved Haiku 4.5 from 79.8% to 89.7% of the hidden checks, but did not make it reliable. Use it for goals that matter, and switch it off for small ones.
 
+## What it runs and touches
+
+Everything is plain Node.js from this plugin's `scripts/` folder, with no dependencies, no network access and nothing downloaded at run time.
+
+- **Seven hooks**, each `node ${CLAUDE_PLUGIN_ROOT}/scripts/hook.js <Event>`: SessionStart, UserPromptSubmit, PreToolUse (only for Write, Edit, MultiEdit, NotebookEdit, Bash and PowerShell), PostToolUse, PostToolUseFailure, Stop, and SubagentStop for the goalpost auditor only. They read the hook input, decide, and print a JSON answer.
+- **Files they read:** `.goal/` in the project, the session transcript Claude Code passes them (to follow the built-in `/goal` records: set, met, cleared), the list of existing test files when a goal starts, and `~/.claude/goalpost.json` or `.claude/goalpost.json` if you created one.
+- **Files they write:** `.goal/` in the project (SPEC.md and PROGRESS.md templates, state.json, evidence.log, AUDIT.md, verify.js), and a small offset file under the system temp folder (`goalpost/<session>.offset`).
+- **Commands:** the only commands goalpost runs are the Verify commands Claude writes into `.goal/SPEC.md`, through `node .goal/verify.js`, in the project folder, in your shell, with a timeout. On Windows verify.js looks for Git Bash (`where git`).
+- **Skills** `status`, `on`, `off`, `release` and `selftest` run `node scripts/gp.js`. `on` and `off` write `enabled` to `~/.claude/goalpost.json`; `selftest` works in a throwaway folder under the temp folder and deletes it.
+- **Agent:** `auditor`, with Read, Grep, Glob and Bash, told not to modify files.
+
 ## More
 
 Benchmark, mechanics and the full list of settings are in the main repository: https://github.com/syntaxixr/goalpost
