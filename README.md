@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4"><img src="docs/media/teaser.gif" alt="Same model, same task: bare /goal ends at 28/34, with goalpost at 34/34" width="860"></a><br>
-  <b><a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4">▶ Watch the full 90-second demo</a></b> · two real benchmark runs, same model, same task, nothing staged
+  <b><a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4">▶ Watch the full 90-second demo</a></b> · two real benchmark runs, same model, same task, nothing staged (the most striking pair of the 33; the honest summary is in <a href="#benchmark">Benchmark</a>)
 </p>
 
 <p align="center"><b>English</b> · <a href="README.ru.md">Русский</a></p>

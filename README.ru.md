@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4"><img src="docs/media/teaser.gif" alt="Та же модель, та же задача: голый /goal заканчивает на 28/34, с goalpost 34/34" width="860"></a><br>
-  <b><a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4">▶ Смотреть всё демо, 90 секунд</a></b> · два настоящих прогона из бенчмарка, та же модель, та же задача, ничего не подстроено
+  <b><a href="https://syntaxixr.github.io/goalpost/docs/media/goalpost.mp4">▶ Смотреть всё демо, 90 секунд</a></b> · два настоящих прогона из бенчмарка, та же модель, та же задача, ничего не подстроено (самая наглядная пара из 33; честный итог в разделе <a href="#бенчмарк">Бенчмарк</a>)
 </p>
 
 <p align="center"><a href="README.md">English</a> · <b>Русский</b></p>
