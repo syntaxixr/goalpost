@@ -56,3 +56,11 @@
 - Criteria whose check never failed during the goal are named by `verify.js` and `/goalpost:status`, and the
   auditor decides whether those checks could fail at all. A hint, never a blocker. Asked on r/LLMDevs.
 
+
+## 2026-10-15
+
+- The plugin no longer copies the whole environment into the processes it starts. `verify.js` sets one flag
+  on its own process instead of building an env object from `process.env`, and `selftest` points its own
+  process at the throwaway project. The directory scanner read the copy as "reads a credential from the
+  user's machine"; nothing was sent anywhere, and the plugin still opens no network connection.
+- `hooks/hooks.json` is only the `hooks` map (no extra top-level `description`).

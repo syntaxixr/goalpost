@@ -67,6 +67,8 @@ function main(argv) {
   console.log(`goalpost verify — ${new Date().toLocaleString()} — shell: ${shell.name}`);
   const marks = {};
   let failed = 0;
+  // The Verify commands inherit this process's environment, plus this flag.
+  process.env.GOALPOST_VERIFY = '1';
   for (const c of selected) {
     if (c.manual) {
       console.log(`${c.id}  MANUAL  ${clip(c.verify, 100)} (judged by the auditor)`);
@@ -83,7 +85,6 @@ function main(argv) {
       encoding: 'utf8',
       timeout: timeoutMs,
       maxBuffer: 64 * 1024 * 1024,
-      env: Object.assign({}, process.env, { GOALPOST_VERIFY: '1' }),
     }, shell.opts));
     const ms = Date.now() - start.getTime();
     const output = `${res.stdout || ''}${res.stderr ? (res.stdout ? '\n' : '') + res.stderr : ''}`;

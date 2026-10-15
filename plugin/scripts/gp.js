@@ -49,13 +49,17 @@ function selftest(argv) {
   const keep = argv.includes('--keep');
   const realCfg = loadConfig(process.env.CLAUDE_PROJECT_DIR || process.cwd());
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'goalpost-selftest-'));
-  const env = Object.assign({}, process.env, { CLAUDE_PROJECT_DIR: dir, GOALPOST_USER_CONFIG: path.join(dir, '.selftest-config.json'), GOALPOST: '' });
+  // Point this short-lived process at the throwaway project; the hooks it runs inherit these.
+  process.env.CLAUDE_PROJECT_DIR = dir;
+  process.env.GOALPOST_USER_CONFIG = path.join(dir, '.selftest-config.json');
+  process.env.GOALPOST_ROOT = dir;
+  process.env.GOALPOST = '';
   const hook = (event, input) => {
     const payload = Object.assign({ session_id: 'selftest', transcript_path: path.join(dir, '.selftest-transcript.jsonl'), cwd: dir, hook_event_name: event }, input);
-    const r = spawnSync(process.execPath, [path.join(__dirname, 'hook.js'), event], { input: JSON.stringify(payload), encoding: 'utf8', env });
+    const r = spawnSync(process.execPath, [path.join(__dirname, 'hook.js'), event], { input: JSON.stringify(payload), encoding: 'utf8' });
     return r.stdout && r.stdout.trim() ? JSON.parse(r.stdout) : null;
   };
-  const verify = () => spawnSync(process.execPath, [path.join(__dirname, 'verify.js')], { cwd: dir, encoding: 'utf8', env: Object.assign({}, env, { GOALPOST_ROOT: dir }) });
+  const verify = () => spawnSync(process.execPath, [path.join(__dirname, 'verify.js')], { cwd: dir, encoding: 'utf8' });
   const write = (rel, text) => fs.writeFileSync(path.join(dir, rel), text);
   const edit = (rel) => hook('PostToolUse', { tool_name: 'Write', tool_input: { file_path: path.join(dir, rel), content: '' } });
   const results = [];

@@ -1,5 +1,4 @@
 {
-  "description": "goalpost: enforce a frozen spec, fresh checks and an audit for every /goal",
   "hooks": {
     "SessionStart": [
       {
