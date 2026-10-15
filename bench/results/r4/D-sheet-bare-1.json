@@ -1,0 +1,722 @@
+{
+  "name": "D-sheet-bare-1",
+  "task": "D-sheet",
+  "arm": "bare",
+  "rep": 1,
+  "round": "r4",
+  "model": "haiku",
+  "claudeVersion": "2.1.299 (Claude Code)",
+  "exit": 0,
+  "timedOut": false,
+  "wallSecs": 550,
+  "startedAt": "2026-10-15T04:56:58.145Z",
+  "score": 1,
+  "checks": "73/73",
+  "reqs": "13/13",
+  "grade": {
+    "task": "D-sheet",
+    "gradedTimes": 3,
+    "checksPassed": 73,
+    "checksTotal": 73,
+    "reqsPassed": 13,
+    "reqsTotal": 13,
+    "flaky": [],
+    "reqs": {
+      "structure": {
+        "total": 3,
+        "passed": 3
+      },
+      "api": {
+        "total": 5,
+        "passed": 5
+      },
+      "syntax": {
+        "total": 2,
+        "passed": 2
+      },
+      "operators": {
+        "total": 9,
+        "passed": 9
+      },
+      "coercion": {
+        "total": 4,
+        "passed": 4
+      },
+      "errors": {
+        "total": 8,
+        "passed": 8
+      },
+      "cycles": {
+        "total": 5,
+        "passed": 5
+      },
+      "math": {
+        "total": 9,
+        "passed": 9
+      },
+      "logic": {
+        "total": 7,
+        "passed": 7
+      },
+      "text": {
+        "total": 9,
+        "passed": 9
+      },
+      "lookup": {
+        "total": 6,
+        "passed": 6
+      },
+      "conditional": {
+        "total": 4,
+        "passed": 4
+      },
+      "info": {
+        "total": 2,
+        "passed": 2
+      }
+    },
+    "results": [
+      {
+        "req": "structure",
+        "title": "own tests pass with node --test",
+        "ok": true,
+        "detail": "exit 0, tests 82",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "structure",
+        "title": "README lists the functions",
+        "ok": true,
+        "detail": "missing ",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "structure",
+        "title": "no dependencies",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "api",
+        "title": "literals: numbers, booleans, text, clearing",
+        "ok": true,
+        "detail": "[42,7,-3.5,1000,true,false,\"hello world\",null,null]",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "api",
+        "title": "getInput returns the raw input; references are case-insensitive with $",
+        "ok": true,
+        "detail": "=1+1 2",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "api",
+        "title": "invalid references throw",
+        "ok": true,
+        "detail": "6/6 threw",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "api",
+        "title": "recalculation follows dependency chains",
+        "ok": true,
+        "detail": "6 60",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "api",
+        "title": "formula referencing an empty cell gives 0",
+        "ok": true,
+        "detail": "=B77 → 0, expected 0",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "syntax",
+        "title": "number and string literals in formulas",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "syntax",
+        "title": "whitespace and case-insensitive names",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "arithmetic",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "^ is right-associative",
+        "ok": true,
+        "detail": "=2^3^2 → 512, expected 512",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "unary minus binds tighter than ^",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "postfix %",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "& concatenation and number formatting",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "comparison has the lowest precedence",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "comparisons of numbers, text (case-insensitive) and booleans",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "cross-type comparison: numbers < text < booleans",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "operators",
+        "title": "empty cell compares as 0 or \"\"",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "coercion",
+        "title": "booleans and numeric text in arithmetic",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "coercion",
+        "title": "non-numeric text in arithmetic → #VALUE!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "coercion",
+        "title": "empty cell is 0 in arithmetic",
+        "ok": true,
+        "detail": "=B50+5 → 5, expected 5",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "coercion",
+        "title": "a range used as a value → #VALUE!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "division by zero",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "unknown function → #NAME?",
+        "ok": true,
+        "detail": "=FOO(1) → \"#NAME?\", expected \"#NAME?\"",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "unknown identifier → #NAME?",
+        "ok": true,
+        "detail": "=foo+1 → \"#NAME?\", expected \"#NAME?\"",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "reference outside the grid inside a formula → #REF!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "parse errors → #ERROR!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "errors propagate through operators and functions (first error wins)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "non-finite results → #NUM!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "errors",
+        "title": "wrong argument count → #VALUE!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cycles",
+        "title": "self reference → #CIRC!",
+        "ok": true,
+        "detail": "#CIRC!",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cycles",
+        "title": "two-cell cycle: both cells #CIRC!",
+        "ok": true,
+        "detail": "#CIRC! #CIRC!",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cycles",
+        "title": "cells depending on a cycle are #CIRC!",
+        "ok": true,
+        "detail": "#CIRC!",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cycles",
+        "title": "breaking the cycle restores values",
+        "ok": true,
+        "detail": "5",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "cycles",
+        "title": "a long chain is fine (no false cycle)",
+        "ok": true,
+        "detail": "300",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "SUM/PRODUCT over ranges skip text, booleans and blanks",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "MIN/MAX/AVERAGE",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "AVERAGE of no numbers → #DIV/0!",
+        "ok": true,
+        "detail": "=AVERAGE(A3:A4) → \"#DIV/0!\", expected \"#DIV/0!\"",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "COUNT, COUNTA, COUNTBLANK",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "ROUND half away from zero, negative digits",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "ROUNDUP / ROUNDDOWN",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "INT rounds down",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "MOD has the sign of the divisor",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "math",
+        "title": "ABS, SQRT, POWER",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "IF with default else",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "IF evaluates only the chosen branch",
+        "ok": true,
+        "detail": "=IF(TRUE,1,1/0) → 1, expected 1",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "IF with a text condition → #VALUE!",
+        "ok": true,
+        "detail": "=IF(\"x\",1,2) → \"#VALUE!\", expected \"#VALUE!\"",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "IFS first true / none → #N/A",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "AND / OR / XOR / NOT",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "AND with a text argument → #VALUE!; ranges skip text",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "logic",
+        "title": "IFERROR catches any error, IFNA only #N/A",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "LEN, UPPER, LOWER",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "TRIM collapses inner spaces",
+        "ok": true,
+        "detail": "=TRIM(\"  a   b  c \") → \"a b c\", expected \"a b c\"",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "LEFT / RIGHT / MID",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "CONCAT flattens ranges row by row",
+        "ok": true,
+        "detail": "=CONCAT(A1:B2,\"!\") → \"abcd!\", expected \"abcd!\"",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "TEXTJOIN with and without ignore_empty",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "SUBSTITUTE all or the n-th occurrence",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "FIND is case-sensitive; not found → #VALUE!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "SEARCH is case-insensitive with wildcards",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "text",
+        "title": "REPT, EXACT, VALUE",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "lookup",
+        "title": "VLOOKUP exact match (case-insensitive)",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "lookup",
+        "title": "VLOOKUP no match → #N/A; bad column → #REF!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "lookup",
+        "title": "VLOOKUP approximate on a sorted column",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "lookup",
+        "title": "INDEX with row and column; outside → #REF!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "lookup",
+        "title": "MATCH exact, ascending and descending",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "lookup",
+        "title": "CHOOSE",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "conditional",
+        "title": "SUMIF with text and wildcard criteria",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "conditional",
+        "title": "SUMIF with numeric operator criteria on the same range",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "conditional",
+        "title": "COUNTIF variants",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "conditional",
+        "title": "AVERAGEIF; no match → #DIV/0!",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "info",
+        "title": "ISBLANK, ISNUMBER, ISTEXT, ISLOGICAL",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      },
+      {
+        "req": "info",
+        "title": "ISERROR and ISNA",
+        "ok": true,
+        "detail": "",
+        "passes": 3,
+        "of": 3
+      }
+    ],
+    "score": 1
+  },
+  "diff": "",
+  "metrics": {
+    "turns": 26,
+    "costUsd": 0.29783813500000006,
+    "durationMs": 547065,
+    "inputTokens": 38,
+    "outputTokens": 119194,
+    "cacheRead": 1719553,
+    "cacheWrite": 190344,
+    "toolCalls": 25,
+    "subagents": 0,
+    "resultSubtype": "success",
+    "lastText": "The `minisheet` engine is built as specified. All 82 tests pass with `npm test`, and the changes are uncommitted in the working tree.\n\n**What's there**\n- `src/sheet.js` exports `Sheet`, with `set`, `get`, and `getInput`, plus the literal rules and the reference handling from TASK.md.\n- The formula parser, with the operator precedence table (including `-2^2` = 4 and right-associative `^`), is in `src/parser.js`.\n- All 55 functions the spec lists are in `src/functions.js`. Helper modules are `src/values.js` and `src/refs.js`.\n- `README.md` lists every function and documents the behaviour choices below.\n- Tests are in `test/`: API, formulas, functions, and cycles. They run on `node --test` with no dependencies.\n\n**Judgment calls where the spec was silent**\n- `COUNTBLANK` counts `\"\"` as blank, as Excel does.\n- `ISBLANK`, `ISNUMBER`, `ISTEXT`, and `ISLOGICAL` propagate errors, because the spec's exception list only names `IFERROR`, `IFNA`, `ISERROR`, and `ISNA`.\n- Cycle detection is static: a self-reference inside an untaken `IF` branch still gives `#CIRC!`.\n- An empty cell compares as `FALSE` against booleans.\n- `SUM()` with no arguments is `#VALUE!` (wrong argument count), while `MIN`, `MAX`, and `PRODUCT` with no numbers give 0.\n- A numeric criterion only matches numeric cells.\n- `REPT` results over 32767 characters give `#VALUE!`.\n- A bare name that is not a function or a cell gives `#NAME?`.\n\n**Performance:** a graph rebuild only happens when a formula cell changes. A 1000-formula sheet with 1000 set-and-get rounds takes about 50ms.",
+    "rate": {
+      "five_hour": {
+        "utilization": 0.25,
+        "resetsAt": 1792057800
+      },
+      "seven_day": {
+        "utilization": 0.43,
+        "resetsAt": 1792260000
+      }
+    },
+    "transcript": "~\\.claude\\projects\\C--gpbench-runs-r4-D-sheet-bare-1\\2bcfd284-dcc4-4361-b117-a09a9dbbc736.jsonl",
+    "evaluator": [
+      {
+        "kind": "set",
+        "ts": "2026-10-15T04:57:00.958Z",
+        "reason": ""
+      },
+      {
+        "kind": "met",
+        "ts": "2026-10-15T05:06:08.000Z",
+        "reason": "The transcript shows the engine built and checked against the spec. The assistant wrote src/sheet.js, src/parser.js, src/functions.js, src/values.js and src/refs.js, plus README.md and four test files. `npm test` ran 82 tests with \"ℹ pass 82 / ℹ fail 0\". Tests cover the literal rules, reference pars"
+      }
+    ],
+    "stopBlocksByGoalpost": 0,
+    "sessionId": "2bcfd284-dcc4-4361-b117-a09a9dbbc736",
+    "terminalReason": "completed",
+    "modelUsage": {
+      "claude-haiku-5-5": {
+        "inputTokens": 38,
+        "outputTokens": 119194,
+        "cacheReadInputTokens": 1719553,
+        "cacheCreationInputTokens": 190344,
+        "webSearchRequests": 0,
+        "costUSD": 0.29783813500000006,
+        "contextWindow": 1000000,
+        "maxOutputTokens": 128000,
+        "thinkingTokens": 78437,
+        "canonicalModel": "claude-haiku-5-5",
+        "provider": "firstParty",
+        "costBasis": "list"
+      }
+    }
+  }
+}

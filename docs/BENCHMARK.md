@@ -34,6 +34,27 @@ How to read this, without spin:
   prove:** a large gain for strong models, or that the audit makes weak models reliable. That needs more runs
   than one subscription's rate limit allowed.
 
+## Follow-up: the spreadsheet task on Haiku 5.5 (round r4, Oct 15–16)
+
+A reader asked for more runs on task D, the one where plain Haiku 4.5 scored 82% and 4% with the same prompt.
+Between the rounds, Claude Code's `haiku` alias moved from Haiku 4.5 to Haiku 5.5, so these runs are a different
+model and are **not** pooled with the tables above.
+
+| Haiku 5.5, task D | Runs | Hidden checks (mean) | Worst run | "Done" while checks failed | Wall time | Cost |
+| --- | --- | --- | --- | --- | --- | --- |
+| bare `/goal` | 4 | 99.3% | 71/73 | 1/4 | 9.7 min | $0.42 |
+| `/goal` + goalpost | 3 | 100% | 73/73 | 0/3 | 16.8 min | $0.66 |
+
+- **The task is at the ceiling on 5.5.** Plain Haiku 5.5 got 73, 73, 71 and 73 of 73. The two-mode split seen on 4.5
+  doesn't show up, so this round can't say whether goalpost would close it; it can only say 5.5 rarely needs it here.
+- **The "judge trusts the chat" gap is still there.** The one bare run at 71/73 ended with the built-in evaluator
+  saying "met".
+- **goalpost let go early in 2 of 3 runs.** One run was released after three stop reminders with no tool use in
+  between, one after the agent wrote BLOCKED.md (the run had 21 denied edits). Both happened to have correct code,
+  but neither went through the final audit. Only run 3 ended the intended way (11 blocks, two audit FAILs, then PASS).
+  That is worth fixing before claiming anything for 5.5.
+- The fourth goalpost run was not made: the account's 5-hour window reached the benchmark's 60% cap.
+
 ## What the benchmark found in goalpost itself
 
 - **PowerShell bookkeeping counted as a code edit (fixed).** A Haiku run on Windows updated

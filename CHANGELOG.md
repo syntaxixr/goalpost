@@ -64,3 +64,6 @@
   process at the throwaway project. The directory scanner read the copy as "reads a credential from the
   user's machine"; nothing was sent anywhere, and the plugin still opens no network connection.
 - `hooks/hooks.json` is only the `hooks` map (no extra top-level `description`).
+- docs/BENCHMARK.md: follow-up round on the spreadsheet task with Haiku 5.5 (Claude Code's `haiku` alias moved off
+  4.5). Bare 99.3% (one "met" at 71/73), goalpost 100% on 3 runs, but goalpost released early in 2 of them. Kept
+  separate from the 4.5 tables.
