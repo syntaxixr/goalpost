@@ -67,3 +67,11 @@
 - docs/BENCHMARK.md: follow-up round on the spreadsheet task with Haiku 5.5 (Claude Code's `haiku` alias moved off
   4.5). Bare 99.3% (one "met" at 71/73), goalpost 100% on 3 runs, but goalpost released early in 2 of them. Kept
   separate from the 4.5 tables.
+- Fix: a stop while background tasks run (the auditor launched in the background) no longer counts toward the
+  no-progress guard, and the Stop hook pauses `backgroundWaitSeconds` (default 10) before blocking again. In a Haiku
+  5.5 run the auditor was still working when three "waiting for it" stops released the goal.
+- Fix: a test listed under SPEC "## Protected" can be released by a declared "## Test changes" entry, as the
+  denial message already promised. Before, only tests that existed at the start could be; a Haiku 5.5 run that
+  found a wrong expectation in its own frozen test had no way out but a USER: blocker. Paths from the user's
+  config (`protectedPaths`) stay read-only.
+- The audit instructions ask for the auditor in the foreground (`run_in_background` off).

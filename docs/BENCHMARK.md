@@ -52,7 +52,9 @@ model and are **not** pooled with the tables above.
 - **goalpost let go early in 2 of 3 runs.** One run was released after three stop reminders with no tool use in
   between, one after the agent wrote BLOCKED.md (the run had 21 denied edits). Both happened to have correct code,
   but neither went through the final audit. Only run 3 ended the intended way (11 blocks, two audit FAILs, then PASS).
-  That is worth fixing before claiming anything for 5.5.
+  Both causes are fixed since (not re-benchmarked yet): run 1 had launched the auditor in the background, and its
+  "waiting for the auditor" stops counted as no progress; run 2 found a wrong expectation in its own test, listed it
+  under "## Test changes", and was still denied because the file was also under "## Protected". See issue #1.
 - The fourth goalpost run was not made: the account's 5-hour window reached the benchmark's 60% cap.
 
 ## What the benchmark found in goalpost itself

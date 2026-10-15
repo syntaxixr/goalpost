@@ -113,6 +113,20 @@ test('PreToolUse: SPEC "## Protected" and "## Test changes" are honoured', (t) =
   assert.equal(runHook(proj, 'PreToolUse', W(proj, 'test/legacy.test.js')).json, null);
 });
 
+test('PreToolUse: a test the spec protects itself can be released by a declared test change', (t) => {
+  const proj = tmpProject({ '.claude/goalpost.json': JSON.stringify({ protectedPaths: ['ci/**'] }) });
+  t.after(proj.cleanup);
+  startGoal(proj);
+  proj.write('.goal/SPEC.md', SPEC_OK + '\n## Protected\n- test/ac-13.test.js\n- test/ac-14.test.js\n- ci/check.sh\n');
+  const decision = (rel) => { const j = runHook(proj, 'PreToolUse', W(proj, rel)).json; return j && j.hookSpecificOutput && j.hookSpecificOutput.permissionDecision; };
+  assert.equal(decision('test/ac-13.test.js'), 'deny');
+  // The goal wrote a wrong expectation into its own test, and says so where the auditor reads it.
+  proj.write('.goal/SPEC.md', proj.read('.goal/SPEC.md') + '\n## Test changes\n- `test/ac-13.test.js`: SEARCH("b?","xAbC") is 3, the expectation said 2\n- ci/check.sh: a path from the user config\n');
+  assert.ok(!decision('test/ac-13.test.js'), 'a declared test change releases it');
+  assert.equal(decision('test/ac-14.test.js'), 'deny');
+  assert.equal(decision('ci/check.sh'), 'deny');
+});
+
 test('PreToolUse: frozen criteria cannot be weakened or dropped', (t) => {
   const proj = tmpProject();
   t.after(proj.cleanup);
@@ -361,13 +375,36 @@ test('Stop: an unmarked BLOCKED.md is dismissed when Claude goes back to work', 
 });
 
 test('Stop: background tasks do not defer the check (a headless session never wakes up)', (t) => {
-  const proj = tmpProject();
+  const proj = tmpProject({ '.claude/goalpost.json': JSON.stringify({ backgroundWaitSeconds: 0 }) });
   t.after(proj.cleanup);
   startGoal(proj);
   const r = runHook(proj, 'Stop', { background_tasks: [{ id: 'b1', type: 'shell', status: 'running' }] });
   assert.equal(r.json.decision, 'block');
   assert.match(r.json.reason, /1 background task\(s\) are still running/);
   assert.equal(proj.state().active, true);
+});
+
+test('Stop: waiting on a background task (an auditor in the background) is not a lack of progress', (t) => {
+  const proj = tmpProject({ '.claude/goalpost.json': JSON.stringify({ backgroundWaitSeconds: 0 }) });
+  t.after(proj.cleanup);
+  startGoal(proj);
+  const bg = { background_tasks: [{ id: 'a1', type: 'agent', status: 'running' }] };
+  for (let i = 0; i < 5; i++) assert.equal(runHook(proj, 'Stop', { stop_hook_active: i > 0, ...bg }).json.decision, 'block');
+  assert.equal(proj.state().active, true);
+  // Once the task is gone, idle stops count again and the guard still ends a real loop.
+  const after = [];
+  for (let i = 0; i < 4; i++) after.push(runHook(proj, 'Stop', { stop_hook_active: true }).json);
+  assert.ok(after.some((x) => x && /no progress/.test(x.systemMessage || '')));
+  assert.equal(proj.state().active, false);
+});
+
+test('Stop: with background tasks the hook pauses before blocking again', (t) => {
+  const proj = tmpProject({ '.claude/goalpost.json': JSON.stringify({ backgroundWaitSeconds: 1 }) });
+  t.after(proj.cleanup);
+  startGoal(proj);
+  const t0 = Date.now();
+  runHook(proj, 'Stop', { background_tasks: [{ id: 'a1', type: 'agent', status: 'running' }] });
+  assert.ok(Date.now() - t0 >= 900, 'expected a pause of about a second');
 });
 
 test('Stop: follows the built-in /goal — clear and impossible release, "met" does not', (t) => {

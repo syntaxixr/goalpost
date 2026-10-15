@@ -20,6 +20,9 @@ const DEFAULTS = Object.freeze({
   auditMinCriteria: 0,
   // Loop safety. A "no-progress" block is one where Claude used no tool since the previous block.
   maxNoProgressBlocks: 3,
+  // While background tasks run (often the auditor), a stop is waiting, not a lack of progress: it is not
+  // counted, and the Stop hook pauses this many seconds before blocking again so the loop stays slow.
+  backgroundWaitSeconds: 10,
   // Total Stop blocks per goal before goalpost gives up and lets Claude stop (0 = unlimited).
   maxBlocks: 80,
   // Wall-clock budget per goal in minutes (0 = unlimited).

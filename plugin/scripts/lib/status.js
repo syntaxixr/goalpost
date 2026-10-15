@@ -80,7 +80,7 @@ function computeStatus(root, state, cfg) {
   if (needsAudit && allAutomatedPass && problems.length === 0) {
     const a = state.audit;
     if (!a) {
-      problems.push({ kind: 'audit', msg: `All ${automated.length} automated checks pass. Last step: an independent audit. Launch the auditor subagent (Agent tool, subagent_type "${cfg.auditAgent}") and ask it to audit .goal/SPEC.md. Stopping is allowed once it returns VERDICT: PASS.` });
+      problems.push({ kind: 'audit', msg: `All ${automated.length} automated checks pass. Last step: an independent audit. Launch the auditor subagent (Agent tool, subagent_type "${cfg.auditAgent}", in the foreground: leave run_in_background off) and ask it to audit .goal/SPEC.md. Stopping is allowed once it returns VERDICT: PASS.` });
     } else if ((a.atMs || 0) < (state.lastEditAt || 0)) {
       problems.push({ kind: 'audit', msg: `Code changed after the last audit. Run the auditor again (subagent_type "${cfg.auditAgent}").` });
     } else if (a.verdict !== 'PASS') {

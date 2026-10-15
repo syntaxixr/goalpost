@@ -28,7 +28,7 @@ function protocol({ condition, protectedFiles, cfg, resumed }) {
     `4. Read-only while the goal runs: ${testNote}, plus anything under "## Protected" in SPEC.md. An existing test the goal really must change (an API migration, a removed feature) goes under "## Test changes" with the reason; the auditor reviews it. A check passed by editing, skipping or special-casing a test, or by hardcoding the expected output, does not count.`,
     '5. .goal/PROGRESS.md is for picking the work up again after a context compaction. A line at each milestone is enough.',
     cfg.requireAudit
-      ? `6. When every criterion passes, run the auditor subagent once (Agent tool, subagent_type "${cfg.auditAgent}") with a one-line prompt such as "Audit .goal/SPEC.md". Stopping is blocked until it returns VERDICT: PASS for the current code.${small}`
+      ? `6. When every criterion passes, run the auditor subagent once (Agent tool, subagent_type "${cfg.auditAgent}", in the foreground: leave run_in_background off) with a one-line prompt such as "Audit .goal/SPEC.md". Stopping is blocked until it returns VERDICT: PASS for the current code.${small}`
       : '6. Before finishing, every criterion is re-checked against the current code.',
     `7. When the same error comes back ${cfg.sameErrorThreshold} times, change the approach: a different strategy, a smaller step, or the source and docs.`,
     '8. A blocker only the user can remove (credentials, access, a product decision) goes into .goal/BLOCKED.md, starting with a line "USER: <what you need>". That is the one way to stop early. A check that cannot pass as written, a failing audit or a spec problem is yours to fix (record a changed Verify command under "## Spec changes").',

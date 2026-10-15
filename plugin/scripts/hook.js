@@ -353,7 +353,8 @@ function onStop(root, input, cfg) {
 
   // Loop safety: give up gracefully instead of being overridden by Claude Code's own cap.
   const progressed = (st.toolCalls || 0) > (st.lastBlockToolCalls == null ? -1 : st.lastBlockToolCalls);
-  st.noProgressBlocks = st.stopBlocks > 0 && !progressed ? (st.noProgressBlocks || 0) + 1 : 0;
+  // Waiting on a background task (the auditor launched in the background, say) is not a lack of progress.
+  if (!bg) st.noProgressBlocks = st.stopBlocks > 0 && !progressed ? (st.noProgressBlocks || 0) + 1 : 0;
   const open = status.problems.slice(0, 5).map((pr) => `- ${clip(pr.msg, 220)}`).join('\n');
   const giveUp = (why) => {
     appendEvidence(root, { kind: 'release', why });
@@ -391,7 +392,13 @@ function onStop(root, input, cfg) {
   });
   const out = { decision: 'block', reason };
   if (notice) out.systemMessage = notice;
+  if (bg) pause(Math.min(Math.max(Number(cfg.backgroundWaitSeconds) || 0, 0), 20) * 1000);
   return out;
+}
+
+// Blocks this process without spinning; the Stop hook has a 30 s timeout.
+function pause(ms) {
+  if (ms > 0) Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
 }
 
 function onSubagentStop(root, input, cfg) {

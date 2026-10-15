@@ -14,19 +14,23 @@ function targetPath(toolInput) {
 
 // Existing test files found at goal start, minus the ones listed under SPEC "## Test changes".
 // Declared changes stay allowed at any time: they are visible in SPEC.md and reviewed by the auditor.
+// The same goes for paths the spec itself lists under "## Protected" (often the goal's own criterion tests):
+// a declared test change releases them too. Paths from the user's config stay read-only.
 function protectedList(state, spec, cfg) {
   const allowed = (spec && spec.testChanges) || [];
   const fromStart = cfg.protectExistingTests ? (state.protectedFiles || []) : [];
   const files = fromStart.filter((f) => !matchAny(f, allowed));
-  const globs = [...(cfg.protectedPaths || []), ...((spec && spec.protected) || [])];
-  return { files, globs };
+  const globs = cfg.protectedPaths || [];
+  const specGlobs = (spec && spec.protected) || [];
+  return { files, globs, specGlobs, allowed };
 }
 
 function isProtected(rel, state, spec, cfg) {
   if (!rel || rel.startsWith('../')) return false;
-  const { files, globs } = protectedList(state, spec, cfg);
+  const { files, globs, specGlobs, allowed } = protectedList(state, spec, cfg);
   if (files.some((f) => samePath(f, rel))) return true;
-  return matchAny(rel, globs);
+  if (matchAny(rel, globs)) return true;
+  return matchAny(rel, specGlobs) && !matchAny(rel, allowed);
 }
 
 function isManaged(rel) {
